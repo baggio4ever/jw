@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+}
+
+.base_url {
+    width: 600px;
+}
