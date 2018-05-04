@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer,VERSION } from '@angular/core';
 import {JwHttpService,TemperatureData} from './jw-http.service';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
@@ -9,6 +9,8 @@ const KEY_BASE_URL = 'KEY_JW_BASE_URL';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
+
+  angular_version = VERSION;
 
   base_url = '';
 
