@@ -38,8 +38,34 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   }
 
   yes() {
+    const date = '2018/05/03';
+
     this.httpService.getHighestTop(
-      '2018/05/01',
+      date,
+      5,
+      data => {
+        console.log(data);
+      }
+    );
+
+    this.httpService.getLowestTop(
+      date,
+      5,
+      data => {
+        console.log(data);
+      }
+    );
+
+    this.httpService.getRain24hTop(
+      date,
+      5,
+      data => {
+        console.log(data);
+      }
+    );
+
+    this.httpService.getSnowTop(
+      date,
       5,
       data => {
         console.log(data);
