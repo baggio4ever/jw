@@ -60,6 +60,17 @@ export class JwHttpService {
     });
   }
   
+
+  getHighestRange( place: string, date_from: string, date_to: string, callback: (data: TemperatureData[]) => void): void {
+    // Parameters obj-
+    const params: HttpParams = new HttpParams().set('place', place ).set('from', date_from).set('to',date_to);
+
+    console.log( place + 'の最高気温 ' + date_from + ' - ' + date_to);
+
+    this.http.get( this.base_url + 'highest_range', { params: params }).subscribe(data => {
+        callback(data['Items'] as TemperatureData[]);
+    });
+  }
 }
 
 export interface TemperatureData {
