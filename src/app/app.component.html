@@ -3,7 +3,7 @@ Angular {{angular_version.full}}
   <mat-form-field class="base_url">
     <input matInput placeholder="Web API URL" [(ngModel)]="base_url">
   </mat-form-field>
-  <button mat-button (click)="applyBaseUrl()">Apply</button>
+  <button mat-button (click)="applyBaseUrl()">保存</button>
 </div>
 
 <div class="container">
@@ -83,7 +83,7 @@ Angular {{angular_version.full}}
       <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
       <mat-datepicker #dp2></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="yes2()">期間!</button>
+    <button mat-raised-button color="primary" (click)="yes2()">1週間!</button>
 
     <div *ngIf="highest_range.length>0">
       <table>
