@@ -12,7 +12,63 @@ Angular {{angular_version.full}}
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp></mat-datepicker>
   </mat-form-field>
-  <button mat-fab color="primary" (click)="yes()">トップ5!</button>
+  <button mat-raised-button color="primary" (click)="yes()">トップ5!</button>
+</div>
+<div *ngIf="highest_top.length>0">
+  <table>
+    <tr>
+      <th>順位</th>
+      <th>観測ポイント</th>
+      <th>最高温度[℃]</th>
+    </tr>
+    <tr *ngFor="let p of highest_top; index as i">
+      <td>{{i+1}}</td>
+      <td>{{p.place}}</td>
+      <td>{{p.temperature}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="lowest_top.length>0">
+  <table>
+    <tr>
+      <th>順位</th>
+      <th>観測ポイント</th>
+      <th>最低温度[℃]</th>
+    </tr>
+    <tr *ngFor="let p of lowest_top; index as i">
+      <td>{{i+1}}</td>
+      <td>{{p.place}}</td>
+      <td>{{p.temperature}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="rain24h_top.length>0">
+  <table>
+    <tr>
+      <th>順位</th>
+      <th>観測ポイント</th>
+      <th>24時間降水量[mm]</th>
+    </tr>
+    <tr *ngFor="let p of rain24h_top; index as i">
+      <td>{{i+1}}</td>
+      <td>{{p.place}}</td>
+      <td>{{p.rainfall_amount}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="snow_top.length>0">
+  <table>
+    <tr>
+      <th>順位</th>
+      <th>観測ポイント</th>
+      <th>積雪量[cm]</th>
+    </tr>
+    <tr *ngFor="let p of snow_top; index as i">
+      <td>{{i+1}}</td>
+      <td>{{p.place}}</td>
+      <td>{{p.snow_depth}}</td>
+    </tr>
+  </table>
 </div>
 
 <div>
@@ -24,6 +80,54 @@ Angular {{angular_version.full}}
     <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
     <mat-datepicker #dp2></mat-datepicker>
   </mat-form-field>
-  <button mat-fab color="primary" (click)="yes2()">期間!</button>
+  <button mat-raised-button color="primary" (click)="yes2()">期間!</button>
+</div>
+<div *ngIf="highest_range.length>0">
+  <table>
+    <tr>
+      <th>日時</th>
+      <th>最高温度[℃]</th>
+    </tr>
+    <tr *ngFor="let p of highest_range; index as i">
+      <td>{{p.date}}</td>
+      <td>{{p.temperature}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="lowest_range.length>0">
+  <table>
+    <tr>
+      <th>日時</th>
+      <th>最低温度[℃]</th>
+    </tr>
+    <tr *ngFor="let p of lowest_range; index as i">
+      <td>{{p.date}}</td>
+      <td>{{p.temperature}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="rain24h_range.length>0">
+  <table>
+    <tr>
+      <th>日時</th>
+      <th>24時間降水量[mm]</th>
+    </tr>
+    <tr *ngFor="let p of rain24h_range; index as i">
+      <td>{{p.date}}</td>
+      <td>{{p.rainfall_amount}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="snow_range.length>0">
+  <table>
+    <tr>
+      <th>日時</th>
+      <th>積雪量[cm]</th>
+    </tr>
+    <tr *ngFor="let p of snow_range; index as i">
+      <td>{{p.date}}</td>
+      <td>{{p.snow_depth}}</td>
+    </tr>
+  </table>
 </div>
 

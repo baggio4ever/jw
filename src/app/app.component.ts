@@ -56,6 +56,16 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   date_range = new FormControl(new Date());
   place = '';
 
+  highest_top = [];
+  lowest_top = [];
+  rain24h_top = [];
+  snow_top = [];
+
+  highest_range = [];
+  lowest_range = [];
+  rain24h_range = [];
+  snow_range = [];
+
   constructor(private httpService: JwHttpService) {
   }
 
@@ -79,8 +89,24 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     console.log('onChanged: ' + fileVal.name);
   }
 
+  clearTops() {
+    this.highest_top = [];
+    this.lowest_top = [];
+    this.rain24h_top = [];
+    this.snow_top = [];
+  }
+
+  clearRanges() {
+    this.highest_range = [];
+    this.lowest_range = [];
+    this.rain24h_range = [];
+    this.snow_range = [];
+  }
+
   yes() {
     console.log(this.date_to_search.value);
+
+    this.clearTops();
 
     // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date
     const d = this.date_to_search.value;
@@ -92,6 +118,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       5,
       data => {
         console.log(data);
+        this.highest_top = data;
       }
     );
 
@@ -100,6 +127,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       5,
       data => {
         console.log(data);
+        this.lowest_top = data;
       }
     );
 
@@ -108,6 +136,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       5,
       data => {
         console.log(data);
+        this.rain24h_top = data;
       }
     );
 
@@ -116,12 +145,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       5,
       data => {
         console.log(data);
+        this.snow_top = data;
       }
     );
   }
 
   yes2() {
     console.log(this.date_range.value);
+
+    this.clearRanges();
 
     // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date
     const d = this.date_range.value;
@@ -136,6 +168,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       formatted_d,
       data => {
         console.log(data);
+        this.highest_range = data;
       }
     );
 
@@ -145,6 +178,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       formatted_d,
       data => {
         console.log(data);
+        this.lowest_range = data;
       }
     );
 
@@ -154,6 +188,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       formatted_d,
       data => {
         console.log(data);
+        this.rain24h_range = data;
       }
     );
 
@@ -163,6 +198,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       formatted_d,
       data => {
         console.log(data);
+        this.snow_range = data;
       }
     );
   }
