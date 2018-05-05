@@ -138,6 +138,33 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         console.log(data);
       }
     );
+
+    this.httpService.getLowestRange(
+      this.place,
+      formatted_d2,
+      formatted_d,
+      data => {
+        console.log(data);
+      }
+    );
+
+    this.httpService.getRain24hRange(
+      this.place,
+      formatted_d2,
+      formatted_d,
+      data => {
+        console.log(data);
+      }
+    );
+
+    this.httpService.getSnowRange(
+      this.place,
+      formatted_d2,
+      formatted_d,
+      data => {
+        console.log(data);
+      }
+    );
   }
 
   applyBaseUrl(): void {
