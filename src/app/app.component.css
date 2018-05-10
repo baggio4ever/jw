@@ -10,3 +10,16 @@
 .base_url {
     width: 600px;
 }
+
+.title {
+    margin-top: 20px;
+    background-color: gray;
+    color: white;
+}
+
+.caution {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: lightpink;
+    font-size: smaller;
+}
