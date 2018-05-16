@@ -19,13 +19,13 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   @Input() highest = [];
   @Input() lowest = [];
   @Input() rain24h = [];
-  @Input() snow = [];
+//  @Input() snow = [];
 
   defaultLabels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
   defaultHighest = [12, 25.5, 3, 5, 2, 3];
   defaultLowest = [2, 9, -3, -5, -2, -10.8];
   defaultRain24h = [18, 39, 30, 15, 22, 3];
-  defaultSnow = [20, 190, 120, 0, 18, 3];
+//  defaultSnow = [20, 190, 120, 0, 18, 3];
 
   constructor() { }
 
@@ -48,9 +48,9 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     if(this.rain24h.length==0) {
       this.rain24h = this.defaultRain24h;
     }
-    if(this.snow.length==0) {
-      this.snow = this.defaultSnow;
-    }
+//    if(this.snow.length==0) {
+//      this.snow = this.defaultSnow;
+//    }
 
     this.myChart = new Chart(this.context, {
       type: 'bar',
@@ -88,7 +88,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
           borderWidth: 1,
           yAxisID: "y-axis-2",
         },
-        {
+/*        {
           type: 'bar',
           label: '積雪量[cm]',
           data: this.snow,
@@ -96,7 +96,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
           borderColor: 'rgba(50, 50, 50, 1)',
           borderWidth: 1,
           yAxisID: "y-axis-2",
-        }]
+        }*/]
       },
       options: {
         responsive: false,
@@ -138,7 +138,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
             },
             scaleLabel: {
               display: true,
-              labelString: '降水量/積雪量[cm]',
+              labelString: '降水量[mm]',
             },
             gridLines: {
 //              color: 'rgba(200,200,255,1)',
@@ -159,7 +159,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     this.myChart.data.datasets[0].data = this.highest;
     this.myChart.data.datasets[1].data = this.lowest;
     this.myChart.data.datasets[2].data = this.rain24h;
-    this.myChart.data.datasets[3].data = this.snow;
+//    this.myChart.data.datasets[3].data = this.snow;
 
     this.myChart.update();
   }

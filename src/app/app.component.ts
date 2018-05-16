@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer,V
 import { JwHttpService, TemperatureData, Observatory } from './jw-http.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
+import * as moment from 'moment';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
@@ -42,6 +43,11 @@ var getDateBefore = function(date, daysAgo) {
   return d;
 }
 
+var getYesterday = function() {
+  const d = Date.now();
+  return getDateBefore(d,1);
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -69,6 +75,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   rain24h_range = [];
   snow_range = [];
 
+  yesterday = null;
+
   constructor(private httpService: JwHttpService) {
   }
 
@@ -77,6 +85,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
     this.base_url = localStorage.getItem(KEY_BASE_URL);
     this.httpService.setBaseURL(this.base_url);
+
+    this.yesterday = moment(getYesterday());
   }
 
   ngAfterViewInit() {
@@ -91,7 +101,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   onChanged(fileVal) {
     console.log('onChanged: ' + fileVal.name);
   }
-
+/*
   clearTops() {
     this.highest_top = [];
     this.lowest_top = [];
@@ -217,7 +227,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       }
     );
   }
-
+*/
   applyBaseUrl(): void {
     console.log(this.base_url);
 
