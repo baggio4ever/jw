@@ -9,8 +9,102 @@
 ※ 今日のデータはありません（毎晩23時以降にデータを気象庁から取得するため）。4月7日以降のデータしかありません。
 </div>
 
-<h1>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ5</h1>
+<h1>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ10</h1>
 <div class="container">
+  <div>
+    <div class="title">最高気温</div>
+    <table *ngIf="highest_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>最高温度[℃]</th>
+      </tr>
+      <tr *ngFor="let p of highest_top; index as i">
+        <td>{{i+1}}</td>
+        <td>{{p.place}}</td>
+        <td>{{p.temperature}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <div class="title">最低気温</div>
+    <table *ngIf="lowest_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>最低温度[℃]</th>
+      </tr>
+      <tr *ngFor="let p of lowest_top; index as i">
+        <td>{{i+1}}</td>
+        <td>{{p.place}}</td>
+        <td>{{p.temperature}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <div class="title">24時間降水量</div>
+    <table *ngIf="rain24h_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>24時間降水量[mm]</th>
+      </tr>
+      <tr *ngFor="let p of rain24h_top; index as i">
+        <td>{{i+1}}</td>
+        <td>{{p.place}}</td>
+        <td>{{p.rainfall_amount}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="observatory_info">
+      <table>
+        <tr>
+          <td>都府県振興局</td>
+          <td>{{observatory_info.prefecture}}</td>
+        </tr>
+        <tr>
+          <td>観測所番号</td>
+          <td>{{observatory_info.place_no}}</td>
+        </tr>
+        <tr>
+          <td>種類</td>
+          <td>{{observatory_info.type}}</td>
+        </tr>
+        <tr>
+          <td>観測所名</td>
+          <td>{{observatory_info.place}}</td>
+        </tr>
+        <tr>
+          <td>ｶﾀｶﾅ名</td>
+          <td>{{observatory_info.kana}}</td>
+        </tr>
+        <tr>
+          <td>所在地</td>
+          <td>{{observatory_info.address}}</td>
+        </tr>
+        <tr>
+          <td>緯度(度)</td>
+          <td>{{observatory_info.latitude}}</td>
+        </tr>
+        <tr>
+          <td>緯度(分)</td>
+          <td>{{observatory_info.latitude_min}}</td>
+        </tr>
+        <tr>
+          <td>経度(度)</td>
+          <td>{{observatory_info.longitude}}</td>
+        </tr>
+        <tr>
+          <td>経度(分)</td>
+          <td>{{observatory_info.longitude_min}}</td>
+        </tr>
+      </table>
+
+  <app-jw-chart></app-jw-chart>
 </div>
 
 <!--
@@ -205,4 +299,3 @@
 </div>
 -->
 
-<app-jw-chart></app-jw-chart>

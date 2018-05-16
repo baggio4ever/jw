@@ -6,6 +6,8 @@ import * as moment from 'moment';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
+const TOP_X = 10;
+
 
 // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
 /**
@@ -87,6 +89,36 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.httpService.setBaseURL(this.base_url);
 
     this.yesterday = moment(getYesterday());
+
+    const formatted_d = this.yesterday.format('YYYY/MM/DD');
+
+    this.httpService.getHighestTop(
+      formatted_d,
+      TOP_X,
+      data => {
+        console.log(data);
+        this.highest_top = data;
+      }
+    );
+
+    this.httpService.getLowestTop(
+      formatted_d,
+      TOP_X,
+      data => {
+        console.log(data);
+        this.lowest_top = data;
+      }
+    );
+
+    this.httpService.getRain24hTop(
+      formatted_d,
+      TOP_X,
+      data => {
+        console.log(data);
+        this.rain24h_top = data;
+      }
+    );
+
   }
 
   ngAfterViewInit() {
