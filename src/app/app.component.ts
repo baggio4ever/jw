@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer,VERSION } from '@angular/core';
-import {JwHttpService,TemperatureData} from './jw-http.service';
+import { JwHttpService, TemperatureData, Observatory } from './jw-http.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
 
@@ -55,6 +55,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   date_to_search = new FormControl(new Date());
   date_range = new FormControl(new Date());
   place = '';
+
+  placeX = '';
+  observatory_info: Observatory;
 
   highest_top = [];
   lowest_top = [];
@@ -199,6 +202,18 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       data => {
         console.log(data);
         this.snow_range = data;
+      }
+    );
+  }
+
+  yes3() {
+    this.observatory_info = null;
+
+    this.httpService.getObservatory(
+      this.placeX,
+      data => {
+        this.observatory_info = data;
+        console.log(this.observatory_info);
       }
     );
   }

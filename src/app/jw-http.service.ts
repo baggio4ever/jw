@@ -107,6 +107,17 @@ export class JwHttpService {
         callback(data['Items'] as SnowData[]);
     });
   }
+
+  getObservatory( place: string, callback: (data: Observatory) => void): void {
+
+    console.log( place + 'の詳細');
+
+    const params: HttpParams = new HttpParams().set('name', place );
+
+    this.http.get( this.base_url + 'observatory', { params: params }).subscribe(data => {
+        callback(data['Items'][0] as Observatory);
+    });
+  }
 }
 
 export interface TemperatureData {
@@ -128,4 +139,17 @@ export interface SnowData {
   date: string;
   time: string;
   snow_depth: string;
+}
+
+export interface Observatory {
+  place: string;
+  kana: string;
+  address: string;
+  latitude: string;
+  latitude_min: string;
+  longitude: string;
+  longitude_min: string;
+  place_no: string;
+  prefecture: string;
+  type: string;
 }
