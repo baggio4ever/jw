@@ -112,9 +112,9 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         },
         scales: {
           yAxes: [{
-            id: "y-axis-1",   // Y軸のID
-            type: "linear",   // linear固定 
-            position: "left", // どちら側に表示される軸か？
+            id: 'y-axis-1',   // Y軸のID
+            type: 'linear',   // linear固定
+            position: 'left', // どちら側に表示される軸か？
             ticks: {          // スケール
               max: 35,
               min: -30,
@@ -128,13 +128,13 @@ export class JwChartComponent implements OnInit, AfterViewInit {
 //              color: 'rgba(200,255,200,1)',
 //            },
           }, {
-            id: "y-axis-2",
-            type: "linear",
-            position: "right",
+            id: 'y-axis-2',
+            type: 'linear',
+            position: 'right',
             ticks: {
-              max: 300,
+              max: 100,
               min: 0,
-              stepSize: 100
+              stepSize: 20
             },
             scaleLabel: {
               display: true,

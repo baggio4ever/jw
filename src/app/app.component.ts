@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer,VERSION } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, ViewChild, VERSION } from '@angular/core';
 import { JwHttpService, TemperatureData, Observatory } from './jw-http.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
+import { JwChartComponent } from './jw-chart/jw-chart.component';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
@@ -79,6 +80,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   yesterday = null;
 
+  @ViewChild('jwChart1') jwChart1:JwChartComponent;
+
   constructor(private httpService: JwHttpService) {
   }
 
@@ -136,12 +139,63 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   getDetail(place: string): void {
     this.observatory_info = null;
+    this.clearRanges();
+
+    const date_to = this.yesterday.format('YYYY/MM/DD');
+    const date_from = this.yesterday.clone().subtract(10,'days').format('YYYY/MM/DD');
+
+    this.httpService.getHighestRange(
+      place,
+      date_from,
+      date_to,
+      data => {
+        console.log(data);
+        this.highest_range = data;
+
+        if (this.hasReceived()) {
+          this.doParse();
+        }
+      }
+    );
+
+    this.httpService.getLowestRange(
+      place,
+      date_from,
+      date_to,
+      data => {
+        console.log(data);
+        this.lowest_range = data;
+
+        if (this.hasReceived()) {
+          this.doParse();
+        }
+      }
+    );
+
+    this.httpService.getRain24hRange(
+      place,
+      date_from,
+      date_to,
+      data => {
+        console.log(data);
+        this.rain24h_range = data;
+
+        if (this.hasReceived()) {
+          this.doParse();
+        }
+      }
+    );
+
 
     this.httpService.getObservatory(
       place,
       data => {
         this.observatory_info = data;
         console.log(this.observatory_info);
+
+        if (this.hasReceived()) {
+          this.doParse();
+        }
       }
     );
   }
@@ -152,7 +206,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.rain24h_top = [];
     this.snow_top = [];
   }
-
+*/
   clearRanges() {
     this.highest_range = [];
     this.lowest_range = [];
@@ -160,6 +214,58 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.snow_range = [];
   }
 
+  doParse(): void {
+    setTimeout( () => {
+      const labels = [];
+      const h_vals = [];
+      const l_vals = [];
+      const r_vals = [];
+
+      console.log('doParse!');
+
+      for (let i = 0; i < this.highest_range.length; i++) {
+        const v = this.highest_range[i];
+        labels.push( v.date );
+        h_vals.push( parseFloat( v.temperature ));
+      }
+      for (let i = 0; i < this.lowest_range.length; i++) {
+        const v = this.lowest_range[i];
+//        labels.push( v.date );
+        l_vals.push( parseFloat( v.temperature ));
+      }
+      for (let i = 0; i < this.rain24h_range.length; i++) {
+        const v = this.rain24h_range[i];
+//        labels.push( v.date );
+        r_vals.push( parseFloat( v.rainfall_amount ));
+      }
+
+      console.log('labels: ' + labels)
+
+      this.jwChart1.labels = labels;
+      this.jwChart1.highest = h_vals;
+      this.jwChart1.lowest = l_vals;
+      this.jwChart1.rain24h = r_vals;
+      this.jwChart1.update();
+
+    }, 0);
+  }
+
+  hasReceived(): boolean {
+    if (this.observatory_info === null) {
+      return false;
+    }
+    if (this.highest_range.length === 0) {
+      return false;
+    }
+    if (this.lowest_range.length === 0) {
+      return false;
+    }
+    if (this.rain24h_range.length === 0) {
+      return false;
+    }
+    return true;
+  }
+/*
   yes() {
     console.log(this.date_to_search.value);
 
