@@ -1,5 +1,5 @@
 .cha {
-    height: 250px;
+    height: 280px;
 /*    width: 400px;
 */
 }
@@ -7,5 +7,5 @@
 .frame {
 /*    background-color: lightblue;
 */
-    border: 1px solid black;
+    border: 1px solid lightgray;
 }

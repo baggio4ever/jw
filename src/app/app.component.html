@@ -9,7 +9,7 @@
 ※ 今日のデータはありません（毎晩23時以降にデータを気象庁から取得するため）。4月7日以降のデータしかありません。
 </div>
 
-<h1>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ10</h1>
+<h2>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ10</h2>
 <div class="container">
   <div>
     <div class="title">最高気温</div>
@@ -61,6 +61,7 @@
 </div>
 
 <div *ngIf="observatory_info">
+  <div class="container">
       <table>
         <tr>
           <td>都府県振興局</td>
@@ -72,7 +73,7 @@
         </tr>
         <tr>
           <td>種類</td>
-          <td>{{observatory_info.type}}</td>
+          <td>{{getType(observatory_info.type)}}</td>
         </tr>
         <tr>
           <td>観測所名</td>
@@ -104,7 +105,9 @@
         </tr>
       </table>
 
-  <app-jw-chart #jwChart1></app-jw-chart>
+      <app-jw-chart #jwChart1></app-jw-chart>
+
+  </div>
 </div>
 
 <!--

@@ -73,8 +73,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   rain24h_top = [];
   snow_top = [];
 
+  highest_range_received = false;
   highest_range = [];
+  lowest_range_received = false;
   lowest_range = [];
+  rain24h_range_received = false;
   rain24h_range = [];
   snow_range = [];
 
@@ -142,7 +145,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.clearRanges();
 
     const date_to = this.yesterday.format('YYYY/MM/DD');
-    const date_from = this.yesterday.clone().subtract(10,'days').format('YYYY/MM/DD');
+    const date_from = this.yesterday.clone().subtract(13,'days').format('YYYY/MM/DD'); // 2週間分
+
+    const days: string[] = [];
+    const m = this.yesterday.clone().subtract(13,'days');
+    for(let i=0;i<=13;i++) {
+      days.push( m.format('YYYY/MM/DD'));
+      m.add(1,'days');
+    }
+    console.log('days: ' + days );
 
     this.httpService.getHighestRange(
       place,
@@ -150,10 +161,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       date_to,
       data => {
         console.log(data);
+        this.highest_range_received = true;
         this.highest_range = data;
 
         if (this.hasReceived()) {
-          this.doParse();
+          this.doParse(days);
         }
       }
     );
@@ -164,10 +176,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       date_to,
       data => {
         console.log(data);
+        this.lowest_range_received = true;
         this.lowest_range = data;
 
         if (this.hasReceived()) {
-          this.doParse();
+          this.doParse(days);
         }
       }
     );
@@ -178,10 +191,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       date_to,
       data => {
         console.log(data);
+        this.rain24h_range_received = true;
         this.rain24h_range = data;
 
         if (this.hasReceived()) {
-          this.doParse();
+          this.doParse(days);
         }
       }
     );
@@ -194,7 +208,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         console.log(this.observatory_info);
 
         if (this.hasReceived()) {
-          this.doParse();
+          this.doParse(days);
         }
       }
     );
@@ -208,13 +222,17 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   }
 */
   clearRanges() {
+    this.highest_range_received = false;
+    this.lowest_range_received = false;
+    this.rain24h_range_received = false;
+
     this.highest_range = [];
     this.lowest_range = [];
     this.rain24h_range = [];
     this.snow_range = [];
   }
 
-  doParse(): void {
+  doParse(days: string[]): void {
     setTimeout( () => {
       const labels = [];
       const h_vals = [];
@@ -223,19 +241,21 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
       console.log('doParse!');
 
+      for (let i=0;i<days.length; i++) {
+        const dd = days[i].split('/');  // YYYY/MM/DD を M/D の形に変換
+        const l = parseInt(dd[1],10) + '/' + parseInt(dd[2],10);
+        labels.push( l );
+      }
       for (let i = 0; i < this.highest_range.length; i++) {
         const v = this.highest_range[i];
-        labels.push( v.date );
         h_vals.push( parseFloat( v.temperature ));
       }
       for (let i = 0; i < this.lowest_range.length; i++) {
         const v = this.lowest_range[i];
-//        labels.push( v.date );
         l_vals.push( parseFloat( v.temperature ));
       }
       for (let i = 0; i < this.rain24h_range.length; i++) {
         const v = this.rain24h_range[i];
-//        labels.push( v.date );
         r_vals.push( parseFloat( v.rainfall_amount ));
       }
 
@@ -250,17 +270,38 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }, 0);
   }
 
+  getType( t: string ): string {
+    let ret = '-';
+    switch(t) {
+      case '官':
+        ret = '気象官署';
+        break;
+      case '四':
+        ret = '四要素観測所';
+        break;
+      case '三':
+        ret = '三要素観測所';
+        break;
+      case '雨':
+        ret = '雨量観測所';
+        break;
+      default:
+        break;
+    }
+    return ret;
+  }
+
   hasReceived(): boolean {
     if (this.observatory_info === null) {
       return false;
     }
-    if (this.highest_range.length === 0) {
+    if (!this.highest_range_received) {
       return false;
     }
-    if (this.lowest_range.length === 0) {
+    if (!this.lowest_range_received) {
       return false;
     }
-    if (this.rain24h_range.length === 0) {
+    if (!this.rain24h_range_received) {
       return false;
     }
     return true;
