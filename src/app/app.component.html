@@ -21,7 +21,7 @@
       </tr>
       <tr *ngFor="let p of highest_top; index as i">
         <td>{{i+1}}</td>
-        <td>{{p.place}}</td>
+        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td>{{p.temperature}}</td>
       </tr>
     </table>
@@ -37,7 +37,7 @@
       </tr>
       <tr *ngFor="let p of lowest_top; index as i">
         <td>{{i+1}}</td>
-        <td>{{p.place}}</td>
+        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td>{{p.temperature}}</td>
       </tr>
     </table>
@@ -53,7 +53,7 @@
       </tr>
       <tr *ngFor="let p of rain24h_top; index as i">
         <td>{{i+1}}</td>
-        <td>{{p.place}}</td>
+        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td>{{p.rainfall_amount}}</td>
       </tr>
     </table>

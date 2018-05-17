@@ -133,6 +133,18 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   onChanged(fileVal) {
     console.log('onChanged: ' + fileVal.name);
   }
+
+  getDetail(place: string): void {
+    this.observatory_info = null;
+
+    this.httpService.getObservatory(
+      place,
+      data => {
+        this.observatory_info = data;
+        console.log(this.observatory_info);
+      }
+    );
+  }
 /*
   clearTops() {
     this.highest_top = [];

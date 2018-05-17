@@ -23,3 +23,10 @@
     background-color: lightpink;
     font-size: smaller;
 }
+
+.like-link {
+    color: #55aa55;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
