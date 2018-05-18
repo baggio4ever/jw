@@ -153,7 +153,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
             type: 'linear',   // linear固定
             position: 'left', // どちら側に表示される軸か？
             ticks: {          // スケール
-              max: 35,
+              max: 40,
               min: -20,
               stepSize: 10
             },
