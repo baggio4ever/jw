@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {Chart} from 'chart.js';
 
+const DEFAULT_MAX_RAIN24H = 100;
+
 @Component({
   selector: 'app-jw-chart',
   templateUrl: './jw-chart.component.html',
@@ -18,7 +20,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   private _labels: string[] = [];
   private _highest = [];
   private _lowest = [];
-  private _rain24h = [];
+  private _rain24h: number[] = [];
 
   @Input()
   set caption( caption:string ) {
@@ -56,10 +58,10 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   }
 //  @Input() snow = [];
 
-  defaultLabels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
+  defaultLabels = ['', '', '', '', '', ''];
   defaultHighest = [12, 25.5, 3, 5, 2, 3];
   defaultLowest = [2, 9, -3, -5, -2, -10.8];
-  defaultRain24h = [18, 39, 30, 15, 22, 3];
+  defaultRain24h = [0, 0, 0, 0, 0, 0];
 //  defaultSnow = [20, 190, 120, 0, 18, 3];
 
   constructor() { }
@@ -152,7 +154,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
             position: 'left', // どちら側に表示される軸か？
             ticks: {          // スケール
               max: 35,
-              min: -30,
+              min: -20,
               stepSize: 10
             },
             scaleLabel: {
@@ -167,7 +169,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
             type: 'linear',
             position: 'right',
             ticks: {
-              max: 100,
+              max: this.getMaxRain24h(),
               min: 0,
               stepSize: 20
             },
@@ -186,6 +188,17 @@ export class JwChartComponent implements OnInit, AfterViewInit {
 
   }
 
+  getMaxRain24h() {
+    const max = Math.max(...this._rain24h);
+    const mix = Math.min(...this._rain24h);
+
+    if( max>DEFAULT_MAX_RAIN24H ) {
+      return Math.ceil(max/20)*20 + 20;
+    } else {
+      return DEFAULT_MAX_RAIN24H;
+    }
+  }
+
   update() {
     if(this.myChart) {
     console.log('ん？呼んだ？');
@@ -195,6 +208,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     this.myChart.data.datasets[0].data = this._highest;
     this.myChart.data.datasets[1].data = this._lowest;
     this.myChart.data.datasets[2].data = this._rain24h;
+    this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
 //    this.myChart.data.datasets[3].data = this.snow;
 
     this.myChart.update();
