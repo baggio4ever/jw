@@ -265,7 +265,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       this.jwChart1.highest = h_vals;
       this.jwChart1.lowest = l_vals;
       this.jwChart1.rain24h = r_vals;
-      this.jwChart1.update();
+//      this.jwChart1.update();
 
     }, 0);
   }

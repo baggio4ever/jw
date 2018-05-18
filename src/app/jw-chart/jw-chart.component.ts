@@ -14,11 +14,46 @@ export class JwChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('myChart') myCanvas;
 
-  @Input() caption:string = '';
-  @Input() labels = [];
-  @Input() highest = [];
-  @Input() lowest = [];
-  @Input() rain24h = [];
+  private _caption: string = '';
+  private _labels: string[] = [];
+  private _highest = [];
+  private _lowest = [];
+  private _rain24h = [];
+
+  @Input()
+  set caption( caption:string ) {
+    this._caption = caption;
+    console.log('set caption');
+    this.update();
+  }
+
+  @Input()
+  set labels( labels:string[] ) {
+    this._labels = labels;
+    console.log('set labels');
+    this.update();
+  }
+
+  @Input()
+  set highest( highest ) {
+    this._highest = highest;
+    console.log('set highest');
+    this.update();
+  }
+
+  @Input()
+  set lowest( lowest ) {
+    this._lowest = lowest;
+    console.log('set lowest');
+    this.update();
+  }
+
+  @Input()
+  set rain24h( rain24h ) {
+    this._rain24h = rain24h;
+    console.log('set rain24h');
+    this.update();
+  }
 //  @Input() snow = [];
 
   defaultLabels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
@@ -36,16 +71,16 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     const canvas = this.myCanvas.nativeElement;
     this.context = canvas.getContext('2d');
 
-    if(this.labels.length==0) {
-      this.labels = this.defaultLabels;
+    if(this._labels.length==0) {
+      this._labels = this.defaultLabels;
     }
-    if(this.highest.length==0) {
+    if(this._highest.length==0) {
       this.highest = this.defaultHighest;
     }
-    if(this.lowest.length==0) {
+    if(this._lowest.length==0) {
       this.lowest = this.defaultLowest;
     }
-    if(this.rain24h.length==0) {
+    if(this._rain24h.length==0) {
       this.rain24h = this.defaultRain24h;
     }
 //    if(this.snow.length==0) {
@@ -55,11 +90,11 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     this.myChart = new Chart(this.context, {
       type: 'bar',
       data: {
-        labels: this.labels,
+        labels: this._labels,
         datasets: [{
           type: 'line',
           label: '最高気温[℃]',
-          data: this.highest,
+          data: this._highest,
           backgroundColor: 'rgba(255,10,10,0.2)',
           borderColor: 'rgba(255,10,10,0.5)',
           pointBackgroundColor: "rgba(255,10,10,0.2)",
@@ -70,7 +105,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         {
           type: 'line',
           label: '最低気温[℃]',
-          data: this.lowest,
+          data: this._lowest,
           pointStyle: 'triangle',
           backgroundColor: 'rgba(10,10,255,0.2)',
           borderColor: 'rgba(10,10,255,0.5)',
@@ -82,7 +117,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         {
           type: 'bar',
           label: '24h降水量[mm]',
-          data: this.rain24h,
+          data: this._rain24h,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1,
@@ -102,7 +137,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         responsive: false,
         title: {
           display: true,
-          text: this.caption, //'XXX の　情報',
+          text: this._caption, //'XXX の　情報',
         },
         legend: {
           position: 'bottom',
@@ -152,15 +187,19 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   }
 
   update() {
+    if(this.myChart) {
     console.log('ん？呼んだ？');
 
-    this.myChart.data.labels = this.labels;
+    this.myChart.data.labels = this._labels;
 
-    this.myChart.data.datasets[0].data = this.highest;
-    this.myChart.data.datasets[1].data = this.lowest;
-    this.myChart.data.datasets[2].data = this.rain24h;
+    this.myChart.data.datasets[0].data = this._highest;
+    this.myChart.data.datasets[1].data = this._lowest;
+    this.myChart.data.datasets[2].data = this._rain24h;
 //    this.myChart.data.datasets[3].data = this.snow;
 
     this.myChart.update();
+    } else {
+      console.log('まだnullっぽい');
+    }
   }
 }
