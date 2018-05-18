@@ -270,6 +270,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }, 0);
   }
 
+/*
   getType( t: string ): string {
     let ret = '-';
     switch(t) {
@@ -290,6 +291,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }
     return ret;
   }
+*/
 
   hasReceived(): boolean {
     if (this.observatory_info === null) {

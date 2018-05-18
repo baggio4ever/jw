@@ -1,0 +1,54 @@
+<div>
+  <table>
+    <tr>
+      <td>観測所名</td>
+      <td>
+        <ruby>
+          {{observatory.place}}<rp>(</rp><rt>{{observatory.kana}}</rt><rp>)</rp>
+        </ruby>
+      </td>
+    </tr>
+    <tr>
+      <td>観測所番号</td>
+      <td>{{observatory.place_no}}</td>
+    </tr>
+    <tr>
+      <td>種類</td>
+      <td>{{getType(observatory.type)}}</td>
+    </tr>
+<!--
+      <tr>
+      <td>ｶﾀｶﾅ名</td>
+      <td>{{observatory.kana}}</td>
+    </tr>
+  -->
+    <tr>
+      <td>都府県振興局</td>
+      <td>{{observatory.prefecture}}</td>
+    </tr>
+    <tr>
+      <td>所在地</td>
+      <td>{{observatory.address}}</td>
+    </tr>
+    <tr>
+      <td>緯度</td>
+      <td>{{observatory.latitude}}度 {{observatory.latitude_min}}分</td>
+    </tr>
+<!--
+    <tr>
+      <td>緯度(分)</td>
+      <td>{{observatory.latitude_min}}</td>
+    </tr>
+  -->
+    <tr>
+      <td>経度</td>
+      <td>{{observatory.longitude}}度 {{observatory.longitude_min}}分</td>
+    </tr>
+<!--
+      <tr>
+      <td>経度(分)</td>
+      <td>{{observatory.longitude_min}}</td>
+    </tr>
+  -->
+  </table>
+</div>

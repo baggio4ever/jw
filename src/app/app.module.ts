@@ -13,11 +13,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {JwHttpService} from './jw-http.service';
 import { JwChartComponent } from './jw-chart/jw-chart.component';
+import { JwObservatoryComponent } from './jw-observatory/jw-observatory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JwChartComponent
+    JwChartComponent,
+    JwObservatoryComponent
   ],
   imports: [
     BrowserModule,
