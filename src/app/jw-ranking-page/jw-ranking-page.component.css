@@ -1,0 +1,60 @@
+h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+table {
+    font-size: smaller;
+    border-color: #dddddd;
+}
+
+td,th {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.ranking {
+    text-align: center;
+}
+
+.observatory-name {
+    width: 100px;
+}
+
+.val-temp {
+    text-align: right;
+}
+
+.val-rain {
+    text-align: right;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.container > div {
+    margin: 10px;
+}
+
+
+.title {
+/*    margin-top: 20px;
+*/    background-color: gray;
+    color: white;
+    font-size: smaller;
+    padding: 4px;
+}
+
+
+.like-link {
+    color: #55aa55;
+/*    text-decoration: underline;
+*/
+    cursor: pointer;
+    font-weight: bold;
+}

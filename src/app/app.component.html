@@ -9,6 +9,13 @@
 ※ 今日のデータはありません（毎晩23時以降にデータを気象庁から取得するため）。4月7日以降のデータしかありません。
 </div>
 
+<nav>
+  <a routerLink="/ranking" routerLinkActive="active">昨日のトップ10</a>
+  <a routerLink="/list" routerLinkActive="active">観測所</a>
+</nav>
+<router-outlet></router-outlet>
+
+<!--
 <h2>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ10</h2>
 <div class="container">
   <div>
@@ -67,6 +74,7 @@
 
   </div>
 </div>
+-->
 
 <!--
 <button (click)="download_test()">試してみよう</button>
@@ -76,9 +84,4 @@
 </div>
 -->
 
-<nav>
-  <a routerLink="/ranking" routerLinkActive="active">昨日のトップ10</a>
-  <a routerLink="/list" routerLinkActive="active">観測所</a>
-</nav>
-<router-outlet></router-outlet>
 

@@ -7,7 +7,7 @@ import { JwChartComponent } from './jw-chart/jw-chart.component';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
-const TOP_X = 10;
+// const TOP_X = 10;
 
 
 // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
@@ -58,13 +58,13 @@ var getYesterday = function() {
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
-  angular_version = VERSION;
+//  angular_version = VERSION;
 
   base_url = '';
   date_to_search = new FormControl(new Date());
   date_range = new FormControl(new Date());
   place = '';
-
+/*
   placeX = '';
   observatory_info: Observatory;
 
@@ -82,10 +82,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   // snow_range = [];
 
   yesterday = null;
-
+*/
   // prefectures: string[] = [];
 
-  @ViewChild('jwChart1') jwChart1:JwChartComponent;
+  // @ViewChild('jwChart1') jwChart1:JwChartComponent;
 
   constructor(private httpService: JwHttpService) {
   }
@@ -95,7 +95,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
     this.base_url = localStorage.getItem(KEY_BASE_URL);
     this.httpService.setBaseURL(this.base_url);
-
+/*
     this.yesterday = moment(getYesterday());
 
     const formatted_d = this.yesterday.format('YYYY/MM/DD');
@@ -126,7 +126,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         this.rain24h_top = data;
       }
     );
-
+*/
   }
 
   ngAfterViewInit() {
@@ -141,7 +141,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   onChanged(fileVal) {
     console.log('onChanged: ' + fileVal.name);
   }
-
+/*
   getDetail(place: string): void {
     this.observatory_info = null;
     this.clearRanges();
@@ -215,6 +215,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       }
     );
   }
+*/
 /*
   clearTops() {
     this.highest_top = [];
@@ -223,6 +224,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.snow_top = [];
   }
 */
+/*
   clearRanges() {
     this.highest_range_received = false;
     this.lowest_range_received = false;
@@ -288,6 +290,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }
     return true;
   }
+*/
 /*
   download_test() {
     console.log('さあ、どうだ');

@@ -1,3 +1,58 @@
-<p>
-  jw-ranking-page works!
-</p>
+<h2>昨日 {{yesterday.format('YYYY/MM/DD')}} のトップ10</h2>
+<div class="container">
+  <div>
+    <div class="title">最高気温</div>
+    <table rules="rows" *ngIf="highest_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>[℃]</th>
+      </tr>
+      <tr *ngFor="let p of highest_top; index as i">
+        <td class="ranking">{{i+1}}</td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="val-temp">{{p.temperature}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <div class="title">最低気温</div>
+    <table rules="rows" *ngIf="lowest_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>[℃]</th>
+      </tr>
+      <tr *ngFor="let p of lowest_top; index as i">
+        <td class="ranking">{{i+1}}</td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="val-temp">{{p.temperature}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <div class="title">24時間降水量</div>
+    <table rules="rows" *ngIf="rain24h_top.length>0">
+      <tr>
+        <th>順位</th>
+        <th>観測所名</th>
+        <th>[mm]</th>
+      </tr>
+      <tr *ngFor="let p of rain24h_top; index as i">
+        <td class="ranking">{{i+1}}</td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="val-rain">{{p.rainfall_amount}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="observatory_info">
+  <div class="container">
+    <app-jw-observatory [observatory]="observatory_info"></app-jw-observatory>
+      <app-jw-chart #jwChart1></app-jw-chart>
+
+  </div>
+</div>
