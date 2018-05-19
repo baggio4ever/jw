@@ -4,7 +4,6 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import { JwChartComponent } from './jw-chart/jw-chart.component';
-//import {MatFormFieldModule} from '@angular/material/form-field';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
@@ -80,7 +79,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   lowest_range = [];
   rain24h_range_received = false;
   rain24h_range = [];
-  snow_range = [];
+  // snow_range = [];
 
   yesterday = null;
 
@@ -232,7 +231,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.highest_range = [];
     this.lowest_range = [];
     this.rain24h_range = [];
-    this.snow_range = [];
+    // this.snow_range = [];
   }
 
   doParse(days: string[]): void {
@@ -273,28 +272,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }, 0);
   }
 
-/*
-  getType( t: string ): string {
-    let ret = '-';
-    switch(t) {
-      case '官':
-        ret = '気象官署';
-        break;
-      case '四':
-        ret = '四要素観測所';
-        break;
-      case '三':
-        ret = '三要素観測所';
-        break;
-      case '雨':
-        ret = '雨量観測所';
-        break;
-      default:
-        break;
-    }
-    return ret;
-  }
-*/
 
   hasReceived(): boolean {
     if (this.observatory_info === null) {
@@ -321,131 +298,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         this.prefectures.push(key);
       }
     });
-/*
-    const fn = '../assets/observatory_tree.json';
-    this.http.get(fn, { responseType: 'json' }).subscribe(data => {
-      console.log('----- json -----');
-      //console.log(data);
-      //this.parse_tpd3_2(data);
-      for(let key in data) {
-        this.prefectures.push(key);
-      }
-    });
-  */
-  }
-/*
-  yes() {
-    console.log(this.date_to_search.value);
-
-    this.clearTops();
-
-    // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date
-    const d = this.date_to_search.value;
-    const formatted_d = formatDate(d,'YYYY/MM/DD')
-    console.log('formated : '+ formatted_d);
-
-    this.httpService.getHighestTop(
-      formatted_d,
-      5,
-      data => {
-        console.log(data);
-        this.highest_top = data;
-      }
-    );
-
-    this.httpService.getLowestTop(
-      formatted_d,
-      5,
-      data => {
-        console.log(data);
-        this.lowest_top = data;
-      }
-    );
-
-    this.httpService.getRain24hTop(
-      formatted_d,
-      5,
-      data => {
-        console.log(data);
-        this.rain24h_top = data;
-      }
-    );
-
-    this.httpService.getSnowTop(
-      formatted_d,
-      5,
-      data => {
-        console.log(data);
-        this.snow_top = data;
-      }
-    );
   }
 
-  yes2() {
-    console.log(this.date_range.value);
-
-    this.clearRanges();
-
-    // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date
-    const d = this.date_range.value;
-    const formatted_d = formatDate(d,'YYYY/MM/DD')
-    const d2 = getDateBefore(d,6);
-    const formatted_d2 = formatDate(d2,'YYYY/MM/DD')
-    console.log('formated : '+ formatted_d);
-
-    this.httpService.getHighestRange(
-      this.place,
-      formatted_d2,
-      formatted_d,
-      data => {
-        console.log(data);
-        this.highest_range = data;
-      }
-    );
-
-    this.httpService.getLowestRange(
-      this.place,
-      formatted_d2,
-      formatted_d,
-      data => {
-        console.log(data);
-        this.lowest_range = data;
-      }
-    );
-
-    this.httpService.getRain24hRange(
-      this.place,
-      formatted_d2,
-      formatted_d,
-      data => {
-        console.log(data);
-        this.rain24h_range = data;
-      }
-    );
-
-    this.httpService.getSnowRange(
-      this.place,
-      formatted_d2,
-      formatted_d,
-      data => {
-        console.log(data);
-        this.snow_range = data;
-      }
-    );
-  }
-
-  yes3() {
-    this.observatory_info = null;
-
-    this.httpService.getObservatory(
-      this.placeX,
-      data => {
-        this.observatory_info = data;
-        console.log(this.observatory_info);
-      }
-    );
-  }
-*/
   applyBaseUrl(): void {
     console.log(this.base_url);
 
