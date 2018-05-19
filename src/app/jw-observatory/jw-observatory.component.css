@@ -4,9 +4,13 @@ table {
 }
 
 td,th {
-    padding: 5px;
+    padding: 4px 5px 0px 5px; /* [上][右][下][左] */
 }
 
 .observatory-name {
     font-size: large;
 }
+
+ .prop-val {
+     width: 220px;
+ }

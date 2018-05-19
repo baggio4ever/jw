@@ -17,11 +17,11 @@
       <tr>
         <th>順位</th>
         <th>観測所名</th>
-        <th>最高温度[℃]</th>
+        <th>[℃]</th>
       </tr>
       <tr *ngFor="let p of highest_top; index as i">
         <td class="ranking">{{i+1}}</td>
-        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td class="val-temp">{{p.temperature}}</td>
       </tr>
     </table>
@@ -33,11 +33,11 @@
       <tr>
         <th>順位</th>
         <th>観測所名</th>
-        <th>最低温度[℃]</th>
+        <th>[℃]</th>
       </tr>
       <tr *ngFor="let p of lowest_top; index as i">
         <td class="ranking">{{i+1}}</td>
-        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td class="val-temp">{{p.temperature}}</td>
       </tr>
     </table>
@@ -49,11 +49,11 @@
       <tr>
         <th>順位</th>
         <th>観測所名</th>
-        <th>24時間降水量[mm]</th>
+        <th>[mm]</th>
       </tr>
       <tr *ngFor="let p of rain24h_top; index as i">
         <td class="ranking">{{i+1}}</td>
-        <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
+        <td class="observatory-name"><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
         <td class="val-rain">{{p.rainfall_amount}}</td>
       </tr>
     </table>

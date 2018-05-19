@@ -10,11 +10,18 @@ table {
 }
 
 td,th {
-    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 .ranking {
     text-align: center;
+}
+
+.observatory-name {
+    width: 100px;
 }
 
 .val-temp {
@@ -42,6 +49,8 @@ td,th {
 /*    margin-top: 20px;
 */    background-color: gray;
     color: white;
+    font-size: smaller;
+    padding: 4px;
 }
 
 .caution {
@@ -54,7 +63,8 @@ td,th {
 
 .like-link {
     color: #55aa55;
-    text-decoration: underline;
+/*    text-decoration: underline;
+*/
     cursor: pointer;
     font-weight: bold;
 }
