@@ -84,6 +84,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   yesterday = null;
 
+  prefectures: string[] = [];
+
   @ViewChild('jwChart1') jwChart1:JwChartComponent;
 
   constructor(private httpService: JwHttpService) {
@@ -308,6 +310,28 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       return false;
     }
     return true;
+  }
+
+  download_test() {
+    console.log('さあ、どうだ');
+
+    this.httpService.getObservatoryList( (data) => {
+      //console.log('----- json -----');
+      for(let key in data) {
+        this.prefectures.push(key);
+      }
+    });
+/*
+    const fn = '../assets/observatory_tree.json';
+    this.http.get(fn, { responseType: 'json' }).subscribe(data => {
+      console.log('----- json -----');
+      //console.log(data);
+      //this.parse_tpd3_2(data);
+      for(let key in data) {
+        this.prefectures.push(key);
+      }
+    });
+  */
   }
 /*
   yes() {

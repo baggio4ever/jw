@@ -118,6 +118,13 @@ export class JwHttpService {
         callback(data['Items'][0] as Observatory);
     });
   }
+
+  getObservatoryList( callback: (data:any) => void ): void {
+    const fn = '../assets/observatory_tree.json';
+    this.http.get(fn, { responseType: 'json' }).subscribe(data => {
+      callback(data);
+    });
+  }
 }
 
 export interface TemperatureData {

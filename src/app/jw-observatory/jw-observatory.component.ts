@@ -16,8 +16,8 @@ export class JwObservatoryComponent implements OnInit {
   }
 
   getType( t: string ): string {
-    console.log('observatory: ' + this.observatory);
-    
+    // console.log('observatory: ' + this.observatory);
+
     let ret = '-';
     switch(t) {
       case '官':
