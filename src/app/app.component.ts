@@ -83,7 +83,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   yesterday = null;
 
-  prefectures: string[] = [];
+  // prefectures: string[] = [];
 
   @ViewChild('jwChart1') jwChart1:JwChartComponent;
 
@@ -288,7 +288,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     }
     return true;
   }
-
+/*
   download_test() {
     console.log('さあ、どうだ');
 
@@ -299,7 +299,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       }
     });
   }
-
+*/
   applyBaseUrl(): void {
     console.log(this.base_url);
 
