@@ -39,28 +39,28 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   @Input()
   set highest( highest ) {
     this._highest = highest;
-    console.log('set highest');
+    // console.log('set highest');
     this.update();
   }
 
   @Input()
   set lowest( lowest ) {
     this._lowest = lowest;
-    console.log('set lowest');
+    // console.log('set lowest');
     this.update();
   }
 
   @Input()
   set rain24h( rain24h ) {
     this._rain24h = rain24h;
-    console.log('set rain24h');
+    // console.log('set rain24h');
     this.update();
   }
 //  @Input() snow = [];
 
   defaultLabels = ['', '', '', '', '', ''];
-  defaultHighest = [12, 25.5, 3, 5, 2, 3];
-  defaultLowest = [2, 9, -3, -5, -2, -10.8];
+  defaultHighest = [0, 0, 0, 0, 0, 0];
+  defaultLowest = [0, 0, 0, 0, 0, 0];
   defaultRain24h = [0, 0, 0, 0, 0, 0];
 //  defaultSnow = [20, 190, 120, 0, 18, 3];
 
@@ -201,7 +201,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
 
   update() {
     if(this.myChart) {
-    console.log('ん？呼んだ？');
+    // console.log('ん？呼んだ？');
 
     this.myChart.data.labels = this._labels;
 
@@ -213,7 +213,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
 
     this.myChart.update();
     } else {
-      console.log('まだnullっぽい');
+      // console.log('まだnullっぽい');
     }
   }
 }

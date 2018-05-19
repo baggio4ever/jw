@@ -118,6 +118,12 @@
   <div *ngFor="let i of prefectures">{{i}}</div>
 </div>
 
+<nav>
+  <a routerLink="/ranking" routerLinkActive="active">昨日のトップ10</a>
+  <a routerLink="/list" routerLinkActive="active">観測所</a>
+</nav>
+<router-outlet></router-outlet>
+
 <!--
 <div class="container">
 
