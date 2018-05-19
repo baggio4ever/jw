@@ -4,6 +4,27 @@ h2 {
     padding-left: 20px;
 }
 
+table {
+    font-size: smaller;
+    border-color: #dddddd;
+}
+
+td,th {
+    padding: 2px;
+}
+
+.ranking {
+    text-align: center;
+}
+
+.val-temp {
+    text-align: right;
+}
+
+.val-rain {
+    text-align: right;
+}
+
 .container {
     display: flex;
     flex-direction: row;

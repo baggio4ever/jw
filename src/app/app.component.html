@@ -13,48 +13,48 @@
 <div class="container">
   <div>
     <div class="title">最高気温</div>
-    <table *ngIf="highest_top.length>0">
+    <table rules="rows" *ngIf="highest_top.length>0">
       <tr>
         <th>順位</th>
         <th>観測所名</th>
         <th>最高温度[℃]</th>
       </tr>
       <tr *ngFor="let p of highest_top; index as i">
-        <td>{{i+1}}</td>
+        <td class="ranking">{{i+1}}</td>
         <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
-        <td>{{p.temperature}}</td>
+        <td class="val-temp">{{p.temperature}}</td>
       </tr>
     </table>
   </div>
 
   <div>
     <div class="title">最低気温</div>
-    <table *ngIf="lowest_top.length>0">
+    <table rules="rows" *ngIf="lowest_top.length>0">
       <tr>
         <th>順位</th>
         <th>観測所名</th>
         <th>最低温度[℃]</th>
       </tr>
       <tr *ngFor="let p of lowest_top; index as i">
-        <td>{{i+1}}</td>
+        <td class="ranking">{{i+1}}</td>
         <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
-        <td>{{p.temperature}}</td>
+        <td class="val-temp">{{p.temperature}}</td>
       </tr>
     </table>
   </div>
 
   <div>
     <div class="title">24時間降水量</div>
-    <table *ngIf="rain24h_top.length>0">
+    <table rules="rows" *ngIf="rain24h_top.length>0">
       <tr>
         <th>順位</th>
         <th>観測所名</th>
         <th>24時間降水量[mm]</th>
       </tr>
       <tr *ngFor="let p of rain24h_top; index as i">
-        <td>{{i+1}}</td>
+        <td class="ranking">{{i+1}}</td>
         <td><span class="like-link" (click)="getDetail(p.place)">{{p.place}}</span></td>
-        <td>{{p.rainfall_amount}}</td>
+        <td class="val-rain">{{p.rainfall_amount}}</td>
       </tr>
     </table>
   </div>

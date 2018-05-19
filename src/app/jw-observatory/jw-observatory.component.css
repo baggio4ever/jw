@@ -1,0 +1,12 @@
+table {
+    font-size: smaller;
+    border-color: #dddddd;
+}
+
+td,th {
+    padding: 5px;
+}
+
+.observatory-name {
+    font-size: large;
+}
