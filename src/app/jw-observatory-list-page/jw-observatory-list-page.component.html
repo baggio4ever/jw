@@ -1,5 +1,34 @@
-<button (click)="download_test()">試してみよう</button>
+<!--
+  Dynamic nested Material menu from json object in Angular 5
 
-<div>
-  <div *ngFor="let i of prefectures">{{i}}</div>
+  https://stackoverflow.com/questions/48146171/dynamic-nested-material-menu-from-json-object-in-angular-5
+-->
+
+<div *ngIf="prefectures.length>0">
+<button mat-button [matMenuTriggerFor]="main_menu">My menu</button>
+
+<mat-menu #main_menu="matMenu">
+  <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
+    <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem }}</button>
+    <mat-menu #sub_menu="matMenu">
+       <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item>{{ subItem }}</button>
+    </mat-menu>
+  </ng-container>
+</mat-menu>
 </div>
+
+<!--
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let i of prefectures">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{i}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let o of observatoryList[i]">
+      {{o}}
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+-->

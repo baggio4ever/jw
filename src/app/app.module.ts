@@ -11,6 +11,9 @@ import {MatButtonModule, MatCheckboxModule,MatNativeDateModule} from '@angular/m
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
+
 import {JwHttpService} from './jw-http.service';
 import { JwChartComponent } from './jw-chart/jw-chart.component';
 import { JwObservatoryComponent } from './jw-observatory/jw-observatory.component';
@@ -51,7 +54,9 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatMenuModule
   ],
   providers: [
     JwHttpService

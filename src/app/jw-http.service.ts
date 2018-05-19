@@ -119,10 +119,10 @@ export class JwHttpService {
     });
   }
 
-  getObservatoryList( callback: (data:any) => void ): void {
+  getObservatoryList( callback: (data:{[key:string]:string[]}) => void ): void {
     const fn = '../assets/observatory_tree.json';
     this.http.get(fn, { responseType: 'json' }).subscribe(data => {
-      callback(data);
+      callback(data as {[key:string]:string[]});
     });
   }
 }

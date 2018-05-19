@@ -8,11 +8,13 @@ import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service'
 })
 export class JwObservatoryListPageComponent implements OnInit {
 
+  observatoryList: {[key:string]:string[]};
   prefectures: string[] = [];
 
   constructor(private httpService: JwHttpService) { }
 
   ngOnInit() {
+    this.download_test();
   }
 
   download_test() {
@@ -20,9 +22,14 @@ export class JwObservatoryListPageComponent implements OnInit {
 
     this.httpService.getObservatoryList( (data) => {
       //console.log('----- json -----');
-      for(let key in data) {
+      this.observatoryList = data;
+      for(let key in this.observatoryList) {
         this.prefectures.push(key);
       }
     });
+  }
+
+  objectKeys(obj) {
+    return Object.keys(obj);
   }
 }
