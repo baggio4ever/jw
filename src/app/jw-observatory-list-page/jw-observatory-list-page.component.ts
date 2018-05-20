@@ -60,4 +60,11 @@ export class JwObservatoryListPageComponent implements OnInit {
       span: 14
     };
   }
+
+  deleteItem(observatory_name: string): void {
+    const index = this.selectedObservatories.indexOf(observatory_name);
+    if(index>=0){
+      this.selectedObservatories.splice(index,1);
+    }
+  }
 }

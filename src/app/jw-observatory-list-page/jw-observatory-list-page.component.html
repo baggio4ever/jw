@@ -5,7 +5,7 @@
 -->
 
 <div *ngIf="prefectures.length>0">
-  <button mat-button [matMenuTriggerFor]="main_menu">観測所</button>
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="main_menu">観測所の選択</button>
 
   <mat-menu #main_menu="matMenu">
     <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
@@ -25,6 +25,14 @@
       <div class="container">
         <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
         <app-jw-chart [chart_param]="getChartParam(ob_name)"></app-jw-chart>
+        <button mat-icon-button (click)="deleteItem(ob_name)">
+          <mat-icon aria-label="削除">delete</mat-icon>
+        </button>
+<!--
+        <button mat-mini-fab>
+          <mat-icon aria-label="削除">delete</mat-icon>
+        </button>
+    -->
       </div>
     </ng-container>
 </div>
