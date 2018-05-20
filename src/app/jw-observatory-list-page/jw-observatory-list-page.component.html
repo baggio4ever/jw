@@ -25,9 +25,12 @@
       <div class="container">
         <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
         <app-jw-chart [chart_param]="getChartParam(ob_name)"></app-jw-chart>
-        <button mat-icon-button (click)="deleteItem(ob_name)">
-          <mat-icon aria-label="削除">delete</mat-icon>
-        </button>
+        <div matTooltip="削除" matTooltipPosition="above">
+          <button mat-icon-button (click)="deleteItem(ob_name)" >
+            <mat-icon aria-label="削除">delete</mat-icon>
+          </button>
+        </div>
+
 <!--
         <button mat-mini-fab>
           <mat-icon aria-label="削除">delete</mat-icon>
