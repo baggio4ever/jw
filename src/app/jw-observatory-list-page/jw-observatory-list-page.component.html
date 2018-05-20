@@ -11,12 +11,15 @@
   <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
     <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem }}</button>
     <mat-menu #sub_menu="matMenu">
-       <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item>{{ subItem }}</button>
+       <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
     </mat-menu>
   </ng-container>
 </mat-menu>
 </div>
 
+<div>
+  <div *ngFor="let o of selectedObservatories">{{o}}</div>
+</div>
 <!--
 <mat-accordion>
   <mat-expansion-panel *ngFor="let i of prefectures">

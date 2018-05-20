@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {Observatory} from '../jw-http.service';
+import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
 
 @Component({
   selector: 'app-jw-observatory',
@@ -8,9 +8,26 @@ import {Observatory} from '../jw-http.service';
 })
 export class JwObservatoryComponent implements OnInit {
 
-  @Input() observatory: Observatory;
+  private _name: string;
+  observatory_info: Observatory;
 
-  constructor() { }
+  @Input() observatory: Observatory;  // obsolete
+  @Input()
+  set observatory_name( name:string ) {
+    this._name = name;
+
+    if(this._name) {
+      this.httpService.getObservatory(
+        this._name,
+        data => {
+          this.observatory_info = data;
+          console.log(this.observatory_info);
+        }
+      );
+    }
+  }
+
+  constructor(private httpService: JwHttpService) { }
 
   ngOnInit() {
   }

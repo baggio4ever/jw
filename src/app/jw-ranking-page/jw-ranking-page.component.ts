@@ -5,6 +5,11 @@ import { JwChartComponent } from '../jw-chart/jw-chart.component';
 
 const TOP_X = 10;
 
+
+/***
+ * こっちでデータを取得しやるよりも、コンポーネントに 場所、期間を指定してコンポーネント側でデータ取得から表示までさせた方が良い気がする
+ */
+
 /**
  * 数日前を返す
  * @param  {Date}   date     日付
@@ -42,7 +47,8 @@ export class JwRankingPageComponent implements OnInit {
   rain24h_range_received = false;
   rain24h_range = [];
 
-  observatory_info: Observatory;
+  // observatory_info: Observatory;
+  observatory_name: string;
 
   yesterday = null;
 
@@ -87,7 +93,8 @@ export class JwRankingPageComponent implements OnInit {
   }
 
   getDetail(place: string): void {
-    this.observatory_info = null;
+    //this.observatory_info = null;
+    this.observatory_name = place;
     this.clearRanges();
 
     const date_to = this.yesterday.format('YYYY/MM/DD');
@@ -146,7 +153,7 @@ export class JwRankingPageComponent implements OnInit {
       }
     );
 
-
+/*
     this.httpService.getObservatory(
       place,
       data => {
@@ -158,6 +165,7 @@ export class JwRankingPageComponent implements OnInit {
         }
       }
     );
+  */
   }
 /*
   clearTops() {
@@ -218,9 +226,11 @@ export class JwRankingPageComponent implements OnInit {
 
 
   hasReceived(): boolean {
+  /*
     if (this.observatory_info === null) {
       return false;
     }
+*/
     if (!this.highest_range_received) {
       return false;
     }

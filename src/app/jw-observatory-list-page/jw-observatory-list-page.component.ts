@@ -11,6 +11,8 @@ export class JwObservatoryListPageComponent implements OnInit {
   observatoryList: {[key:string]:string[]};
   prefectures: string[] = [];
 
+  selectedObservatories: string[] = [];
+
   constructor(private httpService: JwHttpService) { }
 
   ngOnInit() {
@@ -31,5 +33,16 @@ export class JwObservatoryListPageComponent implements OnInit {
 
   objectKeys(obj) {
     return Object.keys(obj);
+  }
+
+  subItemClicked(placeName) {
+    console.log('clicked: ' + placeName);
+
+    if(this.selectedObservatories.includes(placeName)) {
+      console.log('すでに登録済み');
+    } else {
+      console.log('お初にお目にかかります');
+      this.selectedObservatories.push(placeName);
+    }
   }
 }
