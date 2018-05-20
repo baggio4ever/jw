@@ -3,6 +3,6 @@
     flex-direction: row;
 }
 
-.container > div {
+.container > * {
     margin: 10px;
 }
