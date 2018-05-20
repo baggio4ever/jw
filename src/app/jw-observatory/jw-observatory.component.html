@@ -1,9 +1,13 @@
 <div>
-      <div class="observatory-name">
-        <ruby>
-          {{observatory_info?.place}}<rp>(</rp><rt>{{observatory_info?.kana}}</rt><rp>)</rp>
-        </ruby>
-      </div>
+  <div class="observatory-name">
+    <ruby>
+      {{observatory_info?.place}}
+      <rp>(</rp>
+      <rt>{{observatory_info?.kana}}</rt>
+      <rp>)</rp>
+    </ruby>
+  </div>
+  
   <table rules="rows">
     <tr>
       <td>観測所番号</td>
@@ -13,12 +17,6 @@
       <td>種類</td>
       <td class="prop-val">{{getType(observatory_info?.type)}}</td>
     </tr>
-<!--
-      <tr>
-      <td>ｶﾀｶﾅ名</td>
-      <td>{{observatory.kana}}</td>
-    </tr>
-  -->
     <tr>
       <td>都府県振興局</td>
       <td class="prop-val">{{observatory_info?.prefecture}}</td>
@@ -31,21 +29,9 @@
       <td>緯度</td>
       <td class="prop-val">{{observatory_info?.latitude}}度 {{observatory_info?.latitude_min}}分</td>
     </tr>
-<!--
-    <tr>
-      <td>緯度(分)</td>
-      <td>{{observatory.latitude_min}}</td>
-    </tr>
-  -->
     <tr>
       <td>経度</td>
       <td class="prop-val">{{observatory_info?.longitude}}度 {{observatory_info?.longitude_min}}分</td>
     </tr>
-<!--
-      <tr>
-      <td>経度(分)</td>
-      <td>{{observatory.longitude_min}}</td>
-    </tr>
-  -->
   </table>
 </div>
