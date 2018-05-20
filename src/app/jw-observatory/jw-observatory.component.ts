@@ -21,7 +21,7 @@ export class JwObservatoryComponent implements OnInit {
         this._name,
         data => {
           this.observatory_info = data;
-          console.log(this.observatory_info);
+          // console.log(this.observatory_info);
         }
       );
     }

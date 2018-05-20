@@ -52,6 +52,8 @@
 <div *ngIf="observatory_name">
   <div class="container">
     <app-jw-observatory [observatory_name]="observatory_name"></app-jw-observatory>
-    <app-jw-chart #jwChart1></app-jw-chart>
+<!--    <app-jw-chart #jwChart1></app-jw-chart>
+-->
+    <app-jw-chart [chart_param]="getChartParam()"></app-jw-chart>
   </div>
 </div>

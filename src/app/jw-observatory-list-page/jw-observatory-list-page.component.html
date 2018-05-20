@@ -19,7 +19,9 @@
 
 <div>
     <ng-container *ngFor="let ob_name of selectedObservatories">
-      <div>{{ob_name}}</div>
+      <!--
+        <div>{{ob_name}}</div>
+      -->
       <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
     </ng-container>
 </div>

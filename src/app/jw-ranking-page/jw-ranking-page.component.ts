@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
-import { JwChartComponent } from '../jw-chart/jw-chart.component';
+import { JwChartComponent, JwChartParameter } from '../jw-chart/jw-chart.component';
 
 const TOP_X = 10;
 
@@ -96,7 +96,7 @@ export class JwRankingPageComponent implements OnInit {
     //this.observatory_info = null;
     this.observatory_name = place;
     this.clearRanges();
-
+/*
     const date_to = this.yesterday.format('YYYY/MM/DD');
     const date_from = this.yesterday.clone().subtract(13,'days').format('YYYY/MM/DD'); // 2週間分
 
@@ -152,7 +152,7 @@ export class JwRankingPageComponent implements OnInit {
         }
       }
     );
-
+*/
 /*
     this.httpService.getObservatory(
       place,
@@ -193,7 +193,7 @@ export class JwRankingPageComponent implements OnInit {
       const l_vals = [];
       const r_vals = [];
 
-      console.log('doParse!');
+      // console.log('doParse!');
 
       for (let i=0;i<days.length; i++) {
         const dd = days[i].split('/');  // YYYY/MM/DD を M/D の形に変換
@@ -213,12 +213,13 @@ export class JwRankingPageComponent implements OnInit {
         r_vals.push( parseFloat( v.rainfall_amount ));
       }
 
-      console.log('labels: ' + labels)
+      // console.log('labels: ' + labels)
 
-      this.jwChart1.labels = labels;
-      this.jwChart1.highest = h_vals;
-      this.jwChart1.lowest = l_vals;
-      this.jwChart1.rain24h = r_vals;
+//      this.jwChart1.labels = labels;
+//      this.jwChart1.highest = h_vals;
+//      this.jwChart1.lowest = l_vals;
+//      this.jwChart1.rain24h = r_vals;
+
 //      this.jwChart1.update();
 
     }, 0);
@@ -241,6 +242,14 @@ export class JwRankingPageComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  getChartParam():JwChartParameter {
+    return {
+      observatory_name: this.observatory_name,
+      end_date: this.yesterday.format('YYYY/MM/DD'),
+      span: 14
+    };
   }
 
 }
