@@ -11,7 +11,7 @@ export class JwObservatoryComponent implements OnInit {
   private _name: string;
   observatory_info: Observatory;
 
-  @Input() observatory: Observatory;  // obsolete
+  // @Input() observatory: Observatory;  // obsolete
   @Input()
   set observatory_name( name:string ) {
     this._name = name;

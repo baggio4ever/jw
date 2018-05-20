@@ -5,21 +5,25 @@
 -->
 
 <div *ngIf="prefectures.length>0">
-<button mat-button [matMenuTriggerFor]="main_menu">My menu</button>
+  <button mat-button [matMenuTriggerFor]="main_menu">観測所</button>
 
-<mat-menu #main_menu="matMenu">
-  <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
-    <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem }}</button>
-    <mat-menu #sub_menu="matMenu">
-       <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
-    </mat-menu>
-  </ng-container>
-</mat-menu>
+  <mat-menu #main_menu="matMenu">
+    <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
+      <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{ mainItem }}</button>
+      <mat-menu #sub_menu="matMenu">
+        <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
+      </mat-menu>
+    </ng-container>
+  </mat-menu>
 </div>
 
 <div>
-  <div *ngFor="let o of selectedObservatories">{{o}}</div>
+    <ng-container *ngFor="let ob_name of selectedObservatories">
+      <div>{{ob_name}}</div>
+      <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
+    </ng-container>
 </div>
+
 <!--
 <mat-accordion>
   <mat-expansion-panel *ngFor="let i of prefectures">

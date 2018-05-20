@@ -12,6 +12,7 @@ export class JwObservatoryListPageComponent implements OnInit {
   prefectures: string[] = [];
 
   selectedObservatories: string[] = [];
+  //observatory_name = '今津';
 
   constructor(private httpService: JwHttpService) { }
 
