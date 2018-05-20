@@ -22,7 +22,10 @@
       <!--
         <div>{{ob_name}}</div>
       -->
-      <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
+      <div class="container">
+        <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
+        <app-jw-chart [chart_param]="getChartParam(ob_name)"></app-jw-chart>
+      </div>
     </ng-container>
 </div>
 
