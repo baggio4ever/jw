@@ -55,4 +55,14 @@ export class JwObservatoryComponent implements OnInit {
     return ret;
   }
 
+  // http://www.shurey.com/html/googlemaps.html
+  getGmapUrl(): string {
+    const ido = 0;
+    const keido = 0;
+    if(this.observatory_info) {
+      return 'http://maps.google.co.jp/maps?ll=35.004212,135.869105';
+    } else {
+      return 'http://www.amazon.co.jp';
+    }
+  }
 }

@@ -22,7 +22,13 @@
       <td class="prop-val">{{observatory_info?.prefecture}}</td>
     </tr>
     <tr>
-      <td>所在地</td>
+      <td>
+        所在地
+        <button mat-icon-button (click)="aaa.click()" matTooltip="Googleマップを開く" matTooltipPosition="above">
+          <mat-icon aria-label="map">place</mat-icon>
+        </button>
+        <a #aaa [href]="getGmapUrl()" target="_blank" style="display: none;"></a>
+      </td>
       <td class="prop-val">{{observatory_info?.address}}</td>
     </tr>
     <tr>
