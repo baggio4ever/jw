@@ -40,12 +40,12 @@ export class JwRankingPageComponent implements OnInit {
   rain24h_top = [];
   snow_top = [];
 
-  highest_range_received = false;
-  highest_range = [];
-  lowest_range_received = false;
-  lowest_range = [];
-  rain24h_range_received = false;
-  rain24h_range = [];
+//  highest_range_received = false;
+//  highest_range = [];
+//  lowest_range_received = false;
+//  lowest_range = [];
+//  rain24h_range_received = false;
+//  rain24h_range = [];
 
   // observatory_info: Observatory;
   observatory_name: string;
@@ -60,7 +60,8 @@ export class JwRankingPageComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit()');
 
-    this.yesterday = moment(getYesterday());
+//    this.yesterday = moment(getYesterday());
+    this.yesterday = moment().subtract(1,'days');
 
     const formatted_d = this.yesterday.format('YYYY/MM/DD');
 
@@ -95,7 +96,7 @@ export class JwRankingPageComponent implements OnInit {
   getDetail(place: string): void {
     //this.observatory_info = null;
     this.observatory_name = place;
-    this.clearRanges();
+//    this.clearRanges();
 /*
     const date_to = this.yesterday.format('YYYY/MM/DD');
     const date_from = this.yesterday.clone().subtract(13,'days').format('YYYY/MM/DD'); // 2週間分
@@ -175,6 +176,7 @@ export class JwRankingPageComponent implements OnInit {
     this.snow_top = [];
   }
 */
+/*
   clearRanges() {
     this.highest_range_received = false;
     this.lowest_range_received = false;
@@ -185,15 +187,14 @@ export class JwRankingPageComponent implements OnInit {
     this.rain24h_range = [];
     // this.snow_range = [];
   }
-
+  */
+/*
   doParse(days: string[]): void {
     setTimeout( () => {
       const labels = [];
       const h_vals = [];
       const l_vals = [];
       const r_vals = [];
-
-      // console.log('doParse!');
 
       for (let i=0;i<days.length; i++) {
         const dd = days[i].split('/');  // YYYY/MM/DD を M/D の形に変換
@@ -213,25 +214,11 @@ export class JwRankingPageComponent implements OnInit {
         r_vals.push( parseFloat( v.rainfall_amount ));
       }
 
-      // console.log('labels: ' + labels)
-
-//      this.jwChart1.labels = labels;
-//      this.jwChart1.highest = h_vals;
-//      this.jwChart1.lowest = l_vals;
-//      this.jwChart1.rain24h = r_vals;
-
-//      this.jwChart1.update();
-
     }, 0);
   }
-
-
-  hasReceived(): boolean {
-  /*
-    if (this.observatory_info === null) {
-      return false;
-    }
 */
+/*
+  hasReceived(): boolean {
     if (!this.highest_range_received) {
       return false;
     }
@@ -243,6 +230,7 @@ export class JwRankingPageComponent implements OnInit {
     }
     return true;
   }
+*/
 
   getChartParam():JwChartParameter {
     return {
