@@ -17,6 +17,22 @@
   </mat-menu>
 </div>
 
+<div *ngIf="prefectures.length>0">
+<div class="fixed-buttons">
+  <button mat-fab [matMenuTriggerFor]="main_menu2">
+    <mat-icon aria-label="観測所の選択">add</mat-icon>
+  </button>
+  <mat-menu #main_menu2="matMenu">
+    <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
+      <button mat-menu-item [matMenuTriggerFor]="sub_menu2">{{ mainItem }}</button>
+      <mat-menu #sub_menu2="matMenu">
+        <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
+      </mat-menu>
+    </ng-container>
+  </mat-menu>
+</div>
+</div>
+
 <div>
     <ng-container *ngFor="let ob_name of selectedObservatories">
       <!--

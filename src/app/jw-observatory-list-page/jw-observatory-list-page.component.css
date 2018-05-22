@@ -21,3 +21,9 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.fixed-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
