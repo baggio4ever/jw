@@ -105,10 +105,10 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   }
 //  @Input() snow = [];
 
-  defaultLabels = ['', '', '', '', '', ''];
-  defaultHighest = [0, 0, 0, 0, 0, 0];
-  defaultLowest = [0, 0, 0, 0, 0, 0];
-  defaultRain24h = [0, 0, 0, 0, 0, 0];
+//  defaultLabels = ['', '', '', '', '', ''];
+//  defaultHighest = [0, 0, 0, 0, 0, 0];
+//  defaultLowest = [0, 0, 0, 0, 0, 0];
+//  defaultRain24h = [0, 0, 0, 0, 0, 0];
 //  defaultSnow = [20, 190, 120, 0, 18, 3];
 
   constructor(private httpService: JwHttpService) { }

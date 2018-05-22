@@ -3,6 +3,8 @@ import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service'
 import { JwChartComponent, JwChartParameter } from '../jw-chart/jw-chart.component';
 import * as moment from 'moment';
 
+const KEY_OBSERVATORY_LIST = 'KEY_JW_OBSERVATORY_LIST';
+
 @Component({
   selector: 'app-jw-observatory-list-page',
   templateUrl: './jw-observatory-list-page.component.html',
@@ -14,7 +16,6 @@ export class JwObservatoryListPageComponent implements OnInit {
   prefectures: string[] = [];
 
   selectedObservatories: string[] = [];
-  //observatory_name = '今津';
 
   yesterday = null;
 
@@ -22,6 +23,13 @@ export class JwObservatoryListPageComponent implements OnInit {
 
   ngOnInit() {
     this.yesterday = moment().subtract(1,'days');
+
+    // https://www.tam-tam.co.jp/tipsnote/javascript/post5978.html
+    const list = JSON.parse(localStorage.getItem(KEY_OBSERVATORY_LIST));
+
+    if (list) {
+      this.selectedObservatories = list;
+    }
 
     this.download_test();
   }
@@ -50,6 +58,7 @@ export class JwObservatoryListPageComponent implements OnInit {
     } else {
       console.log('お初にお目にかかります');
       this.selectedObservatories.push(placeName);
+      localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
     }
   }
 
@@ -65,6 +74,7 @@ export class JwObservatoryListPageComponent implements OnInit {
     const index = this.selectedObservatories.indexOf(observatory_name);
     if(index>=0){
       this.selectedObservatories.splice(index,1);
+      localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
     }
   }
 }

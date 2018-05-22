@@ -11,7 +11,6 @@ export class JwObservatoryComponent implements OnInit {
   private _name: string;
   observatory_info: Observatory;
 
-  // @Input() observatory: Observatory;  // obsolete
   @Input()
   set observatory_name( name: string ) {
     this._name = name;
@@ -21,7 +20,6 @@ export class JwObservatoryComponent implements OnInit {
         this._name,
         data => {
           this.observatory_info = data;
-          // console.log(this.observatory_info);
         }
       );
     }
@@ -33,9 +31,8 @@ export class JwObservatoryComponent implements OnInit {
   }
 
   getType( t: string ): string {
-    // console.log('observatory: ' + this.observatory);
-
     let ret = '-';
+
     switch (t) {
       case '官':
         ret = '気象官署';
