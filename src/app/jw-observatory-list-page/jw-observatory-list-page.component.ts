@@ -31,10 +31,10 @@ export class JwObservatoryListPageComponent implements OnInit {
       this.selectedObservatories = list;
     }
 
-    this.download_test();
+    this.download_observatories();
   }
 
-  download_test() {
+  download_observatories() {
     console.log('さあ、どうだ');
 
     this.httpService.getObservatoryList( (data) => {
