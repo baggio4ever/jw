@@ -13,10 +13,10 @@ export class JwObservatoryComponent implements OnInit {
 
   // @Input() observatory: Observatory;  // obsolete
   @Input()
-  set observatory_name( name:string ) {
+  set observatory_name( name: string ) {
     this._name = name;
 
-    if(this._name) {
+    if (this._name) {
       this.httpService.getObservatory(
         this._name,
         data => {
@@ -36,7 +36,7 @@ export class JwObservatoryComponent implements OnInit {
     // console.log('observatory: ' + this.observatory);
 
     let ret = '-';
-    switch(t) {
+    switch (t) {
       case '官':
         ret = '気象官署';
         break;
@@ -57,12 +57,16 @@ export class JwObservatoryComponent implements OnInit {
 
   // http://www.shurey.com/html/googlemaps.html
   getGmapUrl(): string {
-    const ido = 0;
-    const keido = 0;
-    if(this.observatory_info) {
-      return 'http://maps.google.co.jp/maps?ll=35.004212,135.869105';
+    if (this.observatory_info) {
+      // 緯度
+      const latitude = parseFloat(this.observatory_info.latitude) + parseFloat(this.observatory_info.latitude_min) / 60.0;
+      // 経度
+      const longitude = parseFloat(this.observatory_info.longitude) + parseFloat(this.observatory_info.longitude_min) / 60.0;
+
+      // return 'http://maps.google.co.jp/maps?ll=35.004212,135.869105';
+      return 'http://maps.google.co.jp/maps?ll=' + latitude + ',' + longitude + '&z=16';
     } else {
-      return 'http://www.amazon.co.jp';
+      return '#';
     }
   }
 }
