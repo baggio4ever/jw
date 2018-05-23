@@ -71,7 +71,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-
+/*
   // obsolete
   @Input()
   set labels( labels:string[] ) {
@@ -103,6 +103,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     // console.log('set rain24h');
     this.update();
   }
+*/
 //  @Input() snow = [];
 
 //  defaultLabels = ['', '', '', '', '', ''];
@@ -281,16 +282,14 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     const mo = moment(date_to.replace(/\//g,'-')).subtract(this._span-1,'days');
     const date_from = mo.format('YYYY/MM/DD');
 
-    // const days: string[] = [];
+
     const label_days: string[] = [];
     //const m = this.yesterday.clone().subtract(13,'days');
     const m = mo.clone();
     for(let i=0;i<this._span;i++) {
-      // days.push( m.format('YYYY/MM/DD'));
       label_days.push( m.format('M/D'));
       m.add(1,'days');
     }
-    //console.log('days: ' + days );
 
     this._labels = label_days;
     this.myChart.data.labels = this._labels;
@@ -302,11 +301,11 @@ export class JwChartComponent implements OnInit, AfterViewInit {
       date_to,
       data => {
         console.log(data);
-        this.highest = data.map( (v) => {
+        this._highest = data.map( (v) => {
           return v.temperature;
         });
-    this.myChart.data.datasets[0].data = this._highest;
-    this.myChart.update();
+        this.myChart.data.datasets[0].data = this._highest;
+        this.myChart.update();
 
 //        if (this.hasReceived()) {
 //          this.doParse(days);
@@ -320,11 +319,11 @@ export class JwChartComponent implements OnInit, AfterViewInit {
       date_to,
       data => {
         console.log(data);
-        this.lowest = data.map( (v) => {
+        this._lowest = data.map( (v) => {
           return v.temperature;
         });
-    this.myChart.data.datasets[1].data = this._lowest;
-    this.myChart.update();
+        this.myChart.data.datasets[1].data = this._lowest;
+        this.myChart.update();
 
 //        if (this.hasReceived()) {
 //          this.doParse(days);
@@ -338,12 +337,12 @@ export class JwChartComponent implements OnInit, AfterViewInit {
       date_to,
       data => {
         console.log(data);
-        this.rain24h = data.map( (v) => {
-          return v.rainfall_amount;
+        this._rain24h = data.map( (v) => {
+          return parseFloat(v.rainfall_amount);
         });
-    this.myChart.data.datasets[2].data = this._rain24h;
-    this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
-    this.myChart.update();
+        this.myChart.data.datasets[2].data = this._rain24h;
+        this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
+        this.myChart.update();
 
 //        if (this.hasReceived()) {
 //          this.doParse(days);
@@ -354,9 +353,9 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   }
 
   clearRanges() {
-    this.highest = [];
-    this.lowest = [];
-    this.rain24h = [];
+    this._highest = [];
+    this._lowest = [];
+    this._rain24h = [];
     // this.snow_range = [];
   }
 /*

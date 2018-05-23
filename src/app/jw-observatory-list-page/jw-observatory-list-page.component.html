@@ -4,6 +4,7 @@
   https://stackoverflow.com/questions/48146171/dynamic-nested-material-menu-from-json-object-in-angular-5
 -->
 
+<!--
 <div *ngIf="prefectures.length>0">
   <button mat-raised-button color="primary" [matMenuTriggerFor]="main_menu">観測所の選択</button>
 
@@ -16,10 +17,11 @@
     </ng-container>
   </mat-menu>
 </div>
+-->
 
 <div *ngIf="prefectures.length>0">
 <div class="fixed-buttons">
-  <button mat-fab [matMenuTriggerFor]="main_menu2">
+  <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の選択" matTooltipPosition="above">
     <mat-icon aria-label="観測所の選択">add</mat-icon>
   </button>
   <mat-menu #main_menu2="matMenu">
@@ -35,9 +37,6 @@
 
 <div>
     <ng-container *ngFor="let ob_name of selectedObservatories">
-      <!--
-        <div>{{ob_name}}</div>
-      -->
       <div class="container">
         <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
         <app-jw-chart [chart_param]="getChartParam(ob_name)"></app-jw-chart>
@@ -46,28 +45,6 @@
             <mat-icon aria-label="削除">delete</mat-icon>
           </button>
         </div>
-
-<!--
-        <button mat-mini-fab>
-          <mat-icon aria-label="削除">delete</mat-icon>
-        </button>
-    -->
       </div>
     </ng-container>
 </div>
-
-<!--
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let i of prefectures">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{i}}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <div *ngFor="let o of observatoryList[i]">
-      {{o}}
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
--->
