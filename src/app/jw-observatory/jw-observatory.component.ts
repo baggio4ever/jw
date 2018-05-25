@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
 
 @Component({
@@ -20,10 +20,13 @@ export class JwObservatoryComponent implements OnInit {
         this._name,
         data => {
           this.observatory_info = data;
+          this.loaded.emit(data);
         }
       );
     }
   }
+
+  @Output() loaded = new EventEmitter<Observatory>();
 
   constructor(private httpService: JwHttpService) { }
 

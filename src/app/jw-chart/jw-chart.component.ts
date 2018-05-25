@@ -398,7 +398,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   }
 */
 
-  hasReceived(): boolean {
+//  hasReceived(): boolean {
   /*
     if (this.observatory_info === null) {
       return false;
@@ -414,6 +414,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
       return false;
     }
 */
-    return true;
-  }
+//    return true;
+//  }
 }

@@ -19,26 +19,10 @@
 </div>
 -->
 
-<div *ngIf="prefectures.length>0">
-<div class="fixed-buttons">
-  <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の選択" matTooltipPosition="above">
-    <mat-icon aria-label="観測所の選択">add</mat-icon>
-  </button>
-  <mat-menu #main_menu2="matMenu">
-    <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
-      <button mat-menu-item [matMenuTriggerFor]="sub_menu2">{{ mainItem }}</button>
-      <mat-menu #sub_menu2="matMenu">
-        <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
-      </mat-menu>
-    </ng-container>
-  </mat-menu>
-</div>
-</div>
-
 <div>
     <ng-container *ngFor="let ob_name of selectedObservatories">
       <div class="container">
-        <app-jw-observatory [observatory_name]="ob_name"></app-jw-observatory>
+        <app-jw-observatory [observatory_name]="ob_name" (loaded)="onLoaded($event)"></app-jw-observatory>
         <app-jw-chart [chart_param]="getChartParam(ob_name)"></app-jw-chart>
         <div class="container-v">
           <button mat-icon-button (click)="deleteItem(ob_name)" matTooltip="削除" matTooltipPosition="above">
@@ -48,3 +32,30 @@
       </div>
     </ng-container>
 </div>
+
+<div *ngIf="prefectures.length>0">
+  <div class="fixed-buttons">
+    <button mat-mini-fab [matMenuTriggerFor]="sort_menu" color="accent" matTooltip="並べ替え" matTooltipPosition="above">
+      <mat-icon aria-label="並べ替え">sort</mat-icon>
+    </button>
+    <mat-menu #sort_menu="matMenu">
+      <button mat-menu-item (click)="sortByName()">観測所名で並べ替え</button>
+      <button mat-menu-item (click)="sortByLatitudeN()">緯度で並べ替え（北から）</button>
+      <button mat-menu-item (click)="sortByLatitudeS()">緯度で並べ替え（南から）</button>
+    </mat-menu>
+
+    <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の選択" matTooltipPosition="above">
+      <mat-icon aria-label="観測所の選択">add</mat-icon>
+    </button>
+    <mat-menu #main_menu2="matMenu">
+      <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">
+        <button mat-menu-item [matMenuTriggerFor]="sub_menu2">{{ mainItem }}</button>
+        <mat-menu #sub_menu2="matMenu">
+          <button *ngFor="let subItem of observatoryList[mainItem]" mat-menu-item (click)="subItemClicked(subItem)">{{ subItem }}</button>
+        </mat-menu>
+      </ng-container>
+    </mat-menu>
+
+  </div>
+</div>
+

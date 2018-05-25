@@ -27,3 +27,7 @@
     right: 20px;
     bottom: 20px;
 }
+
+.fixed-buttons > button {
+    margin-left: 10px;
+}

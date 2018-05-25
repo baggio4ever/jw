@@ -16,6 +16,7 @@ export class JwObservatoryListPageComponent implements OnInit {
   prefectures: string[] = [];
 
   selectedObservatories: string[] = [];
+  loadedObservatoryInfo: {[key:string]:Observatory} = {};
 
   yesterday = null;
 
@@ -76,5 +77,31 @@ export class JwObservatoryListPageComponent implements OnInit {
       this.selectedObservatories.splice(index,1);
       localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
     }
+  }
+
+  sortByName(): void {
+    this.selectedObservatories.sort((a,b) => {
+      const a1 = this.loadedObservatoryInfo[a].kana;
+      const b1 = this.loadedObservatoryInfo[b].kana;
+      if(a1 < b1){
+        return -1;
+    }else if(a1 > b1){
+        return 1;
+    }
+    return 0;
+    });
+  }
+
+  sortByLatitudeN(): void {
+
+  }
+
+  sortByLatitudeS(): void {
+
+  }
+
+  onLoaded(info:Observatory): void {
+    // console.log(info.kana + ' loaded!');
+    this.loadedObservatoryInfo[info.place] = info;
   }
 }
