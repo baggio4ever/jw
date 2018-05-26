@@ -125,6 +125,13 @@ export class JwHttpService {
       callback(data as {[key:string]:string[]});
     });
   }
+
+  getObservatoryAutocompleteDict( callback: (data:{[key: string]: string}) => void ): void {
+    const fn = '../assets/observatory_autocompleteDict.json';
+    this.http.get(fn, { responseType: 'json' }).subscribe(data => {
+      callback(data as {[key:string]:string});
+    });
+  }
 }
 
 export interface TemperatureData {

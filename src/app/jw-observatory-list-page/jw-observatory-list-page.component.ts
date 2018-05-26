@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
 import { JwChartComponent, JwChartParameter } from '../jw-chart/jw-chart.component';
 import { JwObservatoryComponent } from '../jw-observatory/jw-observatory.component';
 import * as moment from 'moment';
+import * as moji from 'moji';
 
 const KEY_OBSERVATORY_LIST = 'KEY_JW_OBSERVATORY_LIST';
 
@@ -16,15 +20,34 @@ export class JwObservatoryListPageComponent implements OnInit {
   observatoryList: {[key:string]:string[]};
   prefectures: string[] = [];
 
+  observatoryAutocompleteDict: {[key: string]: string[]} = {};
+
   selectedObservatories: string[] = [];
   loadedObservatoryInfo: {[key:string]:Observatory} = {};
 
   yesterday = null;
 
+  myControl: FormControl = new FormControl();
+
+  places = [];
+  /*
+  options = [
+    'One',
+    'Two',
+    'Three'
+  ];*/
+  filteredOptions: Observable<string[]>;
+
   constructor(private httpService: JwHttpService) { }
 
   ngOnInit() {
     this.yesterday = moment().subtract(1,'days');
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
 
     // https://www.tam-tam.co.jp/tipsnote/javascript/post5978.html
     const list = JSON.parse(localStorage.getItem(KEY_OBSERVATORY_LIST));
@@ -36,14 +59,44 @@ export class JwObservatoryListPageComponent implements OnInit {
     this.download_observatories();
   }
 
+  filter(val: string): string[] {
+    return this.places.filter( place => {
+      return this.observatoryAutocompleteDict[place].some((v,i,a) => {
+        return v.includes(val);
+      });
+    });
+//    return this.options.filter(option =>
+//      option.toLowerCase().includes(val.toLowerCase()));
+  }
+
   download_observatories() {
-    console.log('さあ、どうだ');
+    //console.log('さあ、どうだ');
 
     this.httpService.getObservatoryList( (data) => {
-      //console.log('----- json -----');
       this.observatoryList = data;
       for(let key in this.observatoryList) {
         this.prefectures.push(key);
+      }
+    });
+
+    this.httpService.getObservatoryAutocompleteDict((data) => {
+      //this.observatoryAutocompleteDict = data;
+      this.places = [];
+      for(let key in data) {
+  
+        // https://www.npmjs.com/package/moji
+        const zen_kata = moji(data[key]).convert('HK','ZK').toString();
+  
+        const zen_hira = moji(zen_kata).convert('KK','HG').toString();
+  
+        const arr = [];
+        arr.push(key);
+        arr.push( data[key]);
+        arr.push(zen_kata);
+        arr.push(zen_hira);
+//        console.log(arr);
+        this.observatoryAutocompleteDict[key] = arr;
+        this.places.push(key);
       }
     });
   }

@@ -15,6 +15,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {JwHttpService} from './jw-http.service';
 import { JwChartComponent } from './jw-chart/jw-chart.component';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule,
     HttpClientModule,  // HTTP通信モジュールをインポート
@@ -60,7 +62,8 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatMenuModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatAutocompleteModule
   ],
   providers: [
     JwHttpService
