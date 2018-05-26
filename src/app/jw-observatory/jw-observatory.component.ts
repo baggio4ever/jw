@@ -55,13 +55,21 @@ export class JwObservatoryComponent implements OnInit {
     return ret;
   }
 
+  // https://qiita.com/tag1216/items/0b38ee5aedea0ef4a058
+  static getDEGfromDMM(v_deg,v_min):number {
+    const deg = v_deg + (v_min / 60.0);
+    return deg;
+  }
+
   // http://www.shurey.com/html/googlemaps.html
   getGmapUrl(): string {
     if (this.observatory_info) {
       // 緯度
-      const latitude = parseFloat(this.observatory_info.latitude) + parseFloat(this.observatory_info.latitude_min) / 60.0;
+//      const latitude = parseFloat(this.observatory_info.latitude) + parseFloat(this.observatory_info.latitude_min) / 60.0;
+      const latitude = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.observatory_info.latitude),parseFloat(this.observatory_info.latitude_min));
       // 経度
-      const longitude = parseFloat(this.observatory_info.longitude) + parseFloat(this.observatory_info.longitude_min) / 60.0;
+//      const longitude = parseFloat(this.observatory_info.longitude) + parseFloat(this.observatory_info.longitude_min) / 60.0;
+      const longitude = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.observatory_info.longitude),parseFloat(this.observatory_info.longitude_min) );
 
       // return 'http://maps.google.co.jp/maps?ll=35.004212,135.869105';
       return 'http://maps.google.co.jp/maps?ll=' + latitude + ',' + longitude + '&z=16';

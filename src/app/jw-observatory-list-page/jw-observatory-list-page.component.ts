@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
 import { JwChartComponent, JwChartParameter } from '../jw-chart/jw-chart.component';
+import { JwObservatoryComponent } from '../jw-observatory/jw-observatory.component';
 import * as moment from 'moment';
 
 const KEY_OBSERVATORY_LIST = 'KEY_JW_OBSERVATORY_LIST';
@@ -80,24 +81,45 @@ export class JwObservatoryListPageComponent implements OnInit {
   }
 
   sortByName(): void {
-    this.selectedObservatories.sort((a,b) => {
+    this.selectedObservatories.sort((a, b) => {
       const a1 = this.loadedObservatoryInfo[a].kana;
       const b1 = this.loadedObservatoryInfo[b].kana;
-      if(a1 < b1){
+
+      if (a1 < b1) {
         return -1;
-    }else if(a1 > b1){
+      } else if (a1 > b1) {
         return 1;
-    }
-    return 0;
+      }
+      return 0;
     });
   }
 
   sortByLatitudeN(): void {
+    this.selectedObservatories.sort((a, b) => {
+      const a1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[a].latitude),parseFloat(this.loadedObservatoryInfo[a].latitude_min));
+      const b1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[b].latitude),parseFloat(this.loadedObservatoryInfo[b].latitude_min));
 
+      if (a1 < b1) {
+        return 1;
+      } else if (a1 > b1) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   sortByLatitudeS(): void {
+    this.selectedObservatories.sort((a, b) => {
+      const a1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[a].latitude),parseFloat(this.loadedObservatoryInfo[a].latitude_min));
+      const b1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[b].latitude),parseFloat(this.loadedObservatoryInfo[b].latitude_min));
 
+      if (a1 < b1) {
+        return -1;
+      } else if (a1 > b1) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   onLoaded(info:Observatory): void {
