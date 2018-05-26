@@ -16,7 +16,7 @@ const TOP_X = 10;
  * @param  {Number} daysAgo  n日前
  * @return {Date}          dateからdaysAgo前の日付
  */
-var getDateBefore = function(date, daysAgo) {
+/*var getDateBefore = function(date, daysAgo) {
   var d = new Date(date);
   d.setDate(d.getDate()-daysAgo);
 
@@ -27,7 +27,7 @@ var getYesterday = function() {
   const d = Date.now();
   return getDateBefore(d,1);
 }
-
+*/
 @Component({
   selector: 'app-jw-ranking-page',
   templateUrl: './jw-ranking-page.component.html',

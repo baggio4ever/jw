@@ -7,7 +7,6 @@ import { JwChartComponent } from './jw-chart/jw-chart.component';
 
 const KEY_BASE_URL = 'KEY_JW_BASE_URL';
 
-// const TOP_X = 10;
 
 
 // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
@@ -17,7 +16,7 @@ const KEY_BASE_URL = 'KEY_JW_BASE_URL';
  * @param  {String} [format] フォーマット
  * @return {String}          フォーマット済み日付
  */
-var formatDate = function (date, format) {
+/*var formatDate = function (date, format) {
   if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
   format = format.replace(/YYYY/g, date.getFullYear());
   format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
@@ -32,14 +31,14 @@ var formatDate = function (date, format) {
   }
   return format;
 };
-
+*/
 /**
  * 数日前を返す
  * @param  {Date}   date     日付
  * @param  {Number} daysAgo  n日前
  * @return {Date}          dateからdaysAgo前の日付
  */
-var getDateBefore = function(date, daysAgo) {
+/*var getDateBefore = function(date, daysAgo) {
   var d = new Date(date);
   d.setDate(d.getDate()-daysAgo);
 
@@ -50,6 +49,7 @@ var getYesterday = function() {
   const d = Date.now();
   return getDateBefore(d,1);
 }
+*/
 
 @Component({
   selector: 'app-root',
@@ -58,12 +58,7 @@ var getYesterday = function() {
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
-//  angular_version = VERSION;
-
   base_url = '';
-//  date_to_search = new FormControl(new Date());
-//  date_range = new FormControl(new Date());
-//  place = '';
 
   constructor(private httpService: JwHttpService) {
   }
