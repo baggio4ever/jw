@@ -43,8 +43,8 @@
     </ng-container>
 </div>
 
-<div *ngIf="prefectures.length>0">
-  <div class="fixed-buttons">
+<div class="fixed-buttons">
+  <div *ngIf="prefectures.length>0">
     <button mat-mini-fab [matMenuTriggerFor]="sort_menu" color="accent" matTooltip="並べ替え" matTooltipPosition="above">
       <mat-icon aria-label="並べ替え">sort</mat-icon>
     </button>
@@ -53,6 +53,7 @@
       <button mat-menu-item (click)="sortByLatitudeN()">緯度で並べ替え（北から）</button>
       <button mat-menu-item (click)="sortByLatitudeS()">緯度で並べ替え（南から）</button>
     </mat-menu>
+
 
     <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の選択" matTooltipPosition="above">
       <mat-icon aria-label="観測所の選択">add</mat-icon>

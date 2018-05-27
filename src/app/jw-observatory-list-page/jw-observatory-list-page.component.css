@@ -28,6 +28,6 @@
     bottom: 20px;
 }
 
-.fixed-buttons > button {
+.fixed-buttons > div > button {
     margin-left: 10px;
 }
