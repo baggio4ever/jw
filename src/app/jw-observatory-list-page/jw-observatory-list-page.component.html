@@ -19,14 +19,15 @@
 </div>
 -->
 <div>
-  <mat-form-field>
-      <input type="text" placeholder="観測所名" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+  <mat-form-field class="input_auto">
+      <input type="text" placeholder="観測所名（補完機能付き）" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" #input_auto>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{ option }}
         </mat-option>
       </mat-autocomplete>
   </mat-form-field>
+  <button mat-button (click)="onAdd(input_auto.value)">追加</button>
 </div>
 
 <div>

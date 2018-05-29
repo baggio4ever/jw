@@ -126,6 +126,24 @@ export class JwObservatoryListPageComponent implements OnInit {
     }
   }
 
+  onAdd(placeName): void {
+    const place = placeName.trim();
+    if(place != '') {
+      if(this.selectedObservatories.includes(place)) {
+        this.showSnackBar(place + ' は既に登録されています');
+      } else {
+        if(Object.keys(this.observatoryAutocompleteDict).includes(place)){
+          this.selectedObservatories.push(place);
+          localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
+          
+          this.showSnackBar(place + ' を追加しました');
+        } else {
+          this.showSnackBar(place + ' は存在しません');
+        }
+      }
+    }
+  }
+
   getChartParam(observatory_name: string):JwChartParameter {
     return {
       observatory_name: observatory_name,
