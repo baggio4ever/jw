@@ -16,6 +16,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {JwHttpService} from './jw-http.service';
 import { JwChartComponent } from './jw-chart/jw-chart.component';
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatIconModule,
     MatTooltipModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
   ],
   providers: [
     JwHttpService

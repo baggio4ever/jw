@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { JwHttpService, TemperatureData, Observatory } from '../jw-http.service';
@@ -38,7 +39,7 @@ export class JwObservatoryListPageComponent implements OnInit {
   ];*/
   filteredOptions: Observable<string[]>;
 
-  constructor(private httpService: JwHttpService) { }
+  constructor(private httpService: JwHttpService,public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.yesterday = moment().subtract(1,'days');
@@ -105,12 +106,20 @@ export class JwObservatoryListPageComponent implements OnInit {
     return Object.keys(obj);
   }
 
+  showSnackBar(msg: string): void {
+      this.snackBar.open(msg,null, {
+        duration: 2000,
+      });
+  }
+
   subItemClicked(placeName) {
     console.log('clicked: ' + placeName);
 
     if(this.selectedObservatories.includes(placeName)) {
+      this.showSnackBar(placeName + ' は既に登録されています');
       console.log('すでに登録済み');
     } else {
+      this.showSnackBar(placeName + ' を追加しました');
       console.log('お初にお目にかかります');
       this.selectedObservatories.push(placeName);
       localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
@@ -130,6 +139,8 @@ export class JwObservatoryListPageComponent implements OnInit {
     if(index>=0){
       this.selectedObservatories.splice(index,1);
       localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
+
+      this.showSnackBar(observatory_name + ' を削除しました');
     }
   }
 
