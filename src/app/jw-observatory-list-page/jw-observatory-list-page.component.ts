@@ -122,7 +122,7 @@ export class JwObservatoryListPageComponent implements OnInit {
       this.showSnackBar(placeName + ' を追加しました');
       console.log('お初にお目にかかります');
       this.selectedObservatories.push(placeName);
-      localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
+      this.saveToLocalStorage();
     }
   }
 
@@ -134,7 +134,7 @@ export class JwObservatoryListPageComponent implements OnInit {
       } else {
         if(Object.keys(this.observatoryAutocompleteDict).includes(place)){
           this.selectedObservatories.push(place);
-          localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
+          this.saveToLocalStorage();
           
           this.showSnackBar(place + ' を追加しました');
         } else {
@@ -142,6 +142,10 @@ export class JwObservatoryListPageComponent implements OnInit {
         }
       }
     }
+  }
+
+  saveToLocalStorage(): void {
+    localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
   }
 
   getChartParam(observatory_name: string):JwChartParameter {
@@ -156,7 +160,7 @@ export class JwObservatoryListPageComponent implements OnInit {
     const index = this.selectedObservatories.indexOf(observatory_name);
     if(index>=0){
       this.selectedObservatories.splice(index,1);
-      localStorage.setItem(KEY_OBSERVATORY_LIST, JSON.stringify(this.selectedObservatories));
+      this.saveToLocalStorage();
 
       this.showSnackBar(observatory_name + ' を削除しました');
     }
@@ -174,6 +178,8 @@ export class JwObservatoryListPageComponent implements OnInit {
       }
       return 0;
     });
+
+    this.saveToLocalStorage();
   }
 
   sortByLatitudeN(): void {
@@ -188,6 +194,8 @@ export class JwObservatoryListPageComponent implements OnInit {
       }
       return 0;
     });
+
+    this.saveToLocalStorage();
   }
 
   sortByLatitudeS(): void {
@@ -202,6 +210,8 @@ export class JwObservatoryListPageComponent implements OnInit {
       }
       return 0;
     });
+
+    this.saveToLocalStorage();
   }
 
   onLoaded(info:Observatory): void {
