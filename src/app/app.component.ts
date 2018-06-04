@@ -71,7 +71,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   }
 
   ngAfterViewInit() {
-    console.log('ngViewInit()');
+    console.log('ngAfterViewInit()');
 
   }
 

@@ -71,47 +71,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-/*
-  // obsolete
-  @Input()
-  set labels( labels:string[] ) {
-    this._labels = labels;
-    console.log('set labels');
-    this.update();
-  }
-
-  // obsolete
-  @Input()
-  set highest( highest ) {
-    this._highest = highest;
-    // console.log('set highest');
-    this.update();
-  }
-
-  // obsolete
-  @Input()
-  set lowest( lowest ) {
-    this._lowest = lowest;
-    // console.log('set lowest');
-    this.update();
-  }
-
-  // obsolete
-  @Input()
-  set rain24h( rain24h ) {
-    this._rain24h = rain24h;
-    // console.log('set rain24h');
-    this.update();
-  }
-*/
-//  @Input() snow = [];
-
-//  defaultLabels = ['', '', '', '', '', ''];
-//  defaultHighest = [0, 0, 0, 0, 0, 0];
-//  defaultLowest = [0, 0, 0, 0, 0, 0];
-//  defaultRain24h = [0, 0, 0, 0, 0, 0];
-//  defaultSnow = [20, 190, 120, 0, 18, 3];
-
   constructor(private httpService: JwHttpService) { }
 
   ngOnInit() {
@@ -120,23 +79,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     const canvas = this.myCanvas.nativeElement;
     this.context = canvas.getContext('2d');
-/*
-    if(this._labels.length==0) {
-      this._labels = this.defaultLabels;
-    }
-    if(this._highest.length==0) {
-      this.highest = this.defaultHighest;
-    }
-    if(this._lowest.length==0) {
-      this.lowest = this.defaultLowest;
-    }
-    if(this._rain24h.length==0) {
-      this.rain24h = this.defaultRain24h;
-    }
-*/
-//    if(this.snow.length==0) {
-//      this.snow = this.defaultSnow;
-//    }
 
     this.myChart = new Chart(this.context, {
       type: 'bar',
@@ -306,10 +248,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         });
         this.myChart.data.datasets[0].data = this._highest;
         this.myChart.update();
-
-//        if (this.hasReceived()) {
-//          this.doParse(days);
-//        }
       }
     );
 
@@ -324,10 +262,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         });
         this.myChart.data.datasets[1].data = this._lowest;
         this.myChart.update();
-
-//        if (this.hasReceived()) {
-//          this.doParse(days);
-//        }
       }
     );
 
@@ -343,10 +277,6 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         this.myChart.data.datasets[2].data = this._rain24h;
         this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
         this.myChart.update();
-
-//        if (this.hasReceived()) {
-//          this.doParse(days);
-//        }
       }
     );
 
@@ -358,62 +288,4 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     this._rain24h = [];
     // this.snow_range = [];
   }
-/*
-  doParse(days: string[]): void {
-    setTimeout( () => {
-      const labels = [];
-      const h_vals = [];
-      const l_vals = [];
-      const r_vals = [];
-
-      console.log('doParse!');
-
-      for (let i=0;i<days.length; i++) {
-        const dd = days[i].split('/');  // YYYY/MM/DD を M/D の形に変換
-        const l = parseInt(dd[1],10) + '/' + parseInt(dd[2],10);
-        labels.push( l );
-      }
-      for (let i = 0; i < this.highest_range.length; i++) {
-        const v = this.highest_range[i];
-        h_vals.push( parseFloat( v.temperature ));
-      }
-      for (let i = 0; i < this.lowest_range.length; i++) {
-        const v = this.lowest_range[i];
-        l_vals.push( parseFloat( v.temperature ));
-      }
-      for (let i = 0; i < this.rain24h_range.length; i++) {
-        const v = this.rain24h_range[i];
-        r_vals.push( parseFloat( v.rainfall_amount ));
-      }
-
-      console.log('labels: ' + labels)
-
-      this.jwChart1.labels = labels;
-      this.jwChart1.highest = h_vals;
-      this.jwChart1.lowest = l_vals;
-      this.jwChart1.rain24h = r_vals;
-//      this.jwChart1.update();
-
-    }, 0);
-  }
-*/
-
-//  hasReceived(): boolean {
-  /*
-    if (this.observatory_info === null) {
-      return false;
-    }
-*/
-/*    if (!this.highest_range_received) {
-      return false;
-    }
-    if (!this.lowest_range_received) {
-      return false;
-    }
-    if (!this.rain24h_range_received) {
-      return false;
-    }
-*/
-//    return true;
-//  }
 }
