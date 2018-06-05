@@ -215,6 +215,38 @@ export class JwObservatoryListPageComponent implements OnInit {
     this.saveToLocalStorage();
   }
 
+  sortByLongitudeE(): void {
+    this.selectedObservatories.sort((a, b) => {
+      const a1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[a].longitude),parseFloat(this.loadedObservatoryInfo[a].longitude_min));
+      const b1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[b].longitude),parseFloat(this.loadedObservatoryInfo[b].longitude_min));
+
+      if (a1 < b1) {
+        return 1;
+      } else if (a1 > b1) {
+        return -1;
+      }
+      return 0;
+    });
+
+    this.saveToLocalStorage();
+  }
+
+  sortByLongitudeW(): void {
+    this.selectedObservatories.sort((a, b) => {
+      const a1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[a].longitude),parseFloat(this.loadedObservatoryInfo[a].longitude_min));
+      const b1 = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.loadedObservatoryInfo[b].longitude),parseFloat(this.loadedObservatoryInfo[b].longitude_min));
+
+      if (a1 < b1) {
+        return -1;
+      } else if (a1 > b1) {
+        return 1;
+      }
+      return 0;
+    });
+
+    this.saveToLocalStorage();
+  }
+
   onLoaded(info:Observatory): void {
     // console.log(info.kana + ' loaded!');
     this.loadedObservatoryInfo[info.place] = info;

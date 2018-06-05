@@ -54,6 +54,8 @@
       <button mat-menu-item (click)="sortByName()">観測所名で並べ替え</button>
       <button mat-menu-item (click)="sortByLatitudeN()">緯度で並べ替え（北から）</button>
       <button mat-menu-item (click)="sortByLatitudeS()">緯度で並べ替え（南から）</button>
+      <button mat-menu-item (click)="sortByLongitudeE()">経度で並べ替え（東から）</button>
+      <button mat-menu-item (click)="sortByLongitudeW()">経度で並べ替え（西から）</button>
     </mat-menu>
 
     <button mat-mini-fab color="accent" matTooltip="観測所の追加（入力）" matTooltipPosition="above" (click)="autocompleteOpened = !autocompleteOpened">
