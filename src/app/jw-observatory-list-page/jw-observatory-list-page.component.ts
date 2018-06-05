@@ -39,6 +39,8 @@ export class JwObservatoryListPageComponent implements OnInit {
   ];*/
   filteredOptions: Observable<string[]>;
 
+  autocompleteOpened = false;
+
   constructor(private httpService: JwHttpService,public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -71,7 +73,6 @@ export class JwObservatoryListPageComponent implements OnInit {
   }
 
   download_observatories() {
-    //console.log('さあ、どうだ');
 
     this.httpService.getObservatoryList( (data) => {
       this.observatoryList = data;
@@ -95,7 +96,7 @@ export class JwObservatoryListPageComponent implements OnInit {
         arr.push( data[key]);
         arr.push(zen_kata);
         arr.push(zen_hira);
-//        console.log(arr);
+
         this.observatoryAutocompleteDict[key] = arr;
         this.places.push(key);
       }

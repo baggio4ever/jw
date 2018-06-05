@@ -18,6 +18,7 @@
   </mat-menu>
 </div>
 -->
+<!--
 <div>
   <mat-form-field class="input_auto">
       <input type="text" placeholder="観測所名（補完機能付き）" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" #input_auto>
@@ -29,7 +30,7 @@
   </mat-form-field>
   <button mat-button (click)="onAdd(input_auto.value)">追加</button>
 </div>
-
+-->
 <div>
     <ng-container *ngFor="let ob_name of selectedObservatories">
       <div class="container">
@@ -46,7 +47,7 @@
 
 <div class="fixed-buttons">
   <div *ngIf="prefectures.length>0">
-    <button mat-mini-fab [matMenuTriggerFor]="sort_menu" color="accent" matTooltip="並べ替え" matTooltipPosition="above">
+    <button mat-mini-fab [matMenuTriggerFor]="sort_menu" color="primary" matTooltip="並べ替え" matTooltipPosition="above">
       <mat-icon aria-label="並べ替え">sort</mat-icon>
     </button>
     <mat-menu #sort_menu="matMenu">
@@ -55,9 +56,26 @@
       <button mat-menu-item (click)="sortByLatitudeS()">緯度で並べ替え（南から）</button>
     </mat-menu>
 
-
-    <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の選択" matTooltipPosition="above">
-      <mat-icon aria-label="観測所の選択">add</mat-icon>
+    <button mat-mini-fab color="accent" matTooltip="観測所の追加（入力）" matTooltipPosition="above" (click)="autocompleteOpened = !autocompleteOpened">
+      <mat-icon aria-label="観測所の追加（入力）">edit</mat-icon>
+    </button>
+<div *ngIf="autocompleteOpened">
+  <mat-form-field class="input_auto">
+      <input type="text" placeholder="観測所名（補完機能付き）" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" #input_auto>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+<!--  <button mat-raised-button color="accent" (click)="onAdd(input_auto.value)">追加</button>
+-->
+  <button mat-icon-button color="accent" (click)="onAdd(input_auto.value)">
+    <mat-icon aria-label="追加">add_box</mat-icon>
+  </button>
+</div>
+    <button mat-fab [matMenuTriggerFor]="main_menu2" matTooltip="観測所の追加（リスト）" matTooltipPosition="above">
+      <mat-icon aria-label="観測所の追加（リスト）">add</mat-icon>
     </button>
     <mat-menu #main_menu2="matMenu">
       <ng-container *ngFor="let mainItem of objectKeys(observatoryList)">

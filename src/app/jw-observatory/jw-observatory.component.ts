@@ -65,10 +65,8 @@ export class JwObservatoryComponent implements OnInit {
   getGmapUrl(): string {
     if (this.observatory_info) {
       // 緯度
-//      const latitude = parseFloat(this.observatory_info.latitude) + parseFloat(this.observatory_info.latitude_min) / 60.0;
       const latitude = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.observatory_info.latitude),parseFloat(this.observatory_info.latitude_min));
       // 経度
-//      const longitude = parseFloat(this.observatory_info.longitude) + parseFloat(this.observatory_info.longitude_min) / 60.0;
       const longitude = JwObservatoryComponent.getDEGfromDMM(parseFloat(this.observatory_info.longitude),parseFloat(this.observatory_info.longitude_min) );
 
       // return 'http://maps.google.co.jp/maps?ll=35.004212,135.869105';

@@ -37,5 +37,13 @@
 }
 
 .fixed-buttons > div > button {
-    margin-left: 10px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.fixed-buttons > div > div {
+    padding-left: 6px;
+    padding-right: 6px;
+    display: inline-block;
+    background-color: white;
 }
