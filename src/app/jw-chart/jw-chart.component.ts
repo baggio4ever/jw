@@ -18,28 +18,28 @@ export interface JwChartParameter {
   styleUrls: ['./jw-chart.component.css']
 })
 export class JwChartComponent implements OnInit, AfterViewInit {
-  
+
   context: CanvasRenderingContext2D;
 
   myChart = null;
 
   @ViewChild('myChart') myCanvas;
 
-  private _caption: string = '';
+  private _caption = '';
 
   private _labels: string[] = [];
   private _highest = [];
   private _lowest = [];
   private _rain24h: number[] = [];
 
-  private _name: string = '';
-  private _end_date: string = '';
-  private _span: number = 14;
+  private _name = '';
+  private _end_date = '';
+  private _span = 14;
 
   private _opened = false;
 
   @Input()
-  set caption( caption:string ) {
+  set caption( caption: string ) {
     this._caption = caption;
     console.log('set caption');
     this.update();
@@ -49,15 +49,15 @@ export class JwChartComponent implements OnInit, AfterViewInit {
   set chart_param( param: JwChartParameter ) {
     let changed = false;
 
-    if( this._name != param.observatory_name) {
+    if ( this._name != param.observatory_name) {
       changed = true;
       this._name = param.observatory_name;
     }
-    if( this._end_date != param.end_date ) {
+    if ( this._end_date != param.end_date ) {
       changed = true;
       this._end_date = param.end_date;
     }
-    if( this._span != param.span ) {
+    if ( this._span != param.span ) {
       changed = true;
       this._span = param.span;
     }
@@ -90,10 +90,10 @@ export class JwChartComponent implements OnInit, AfterViewInit {
           data: this._highest,
           backgroundColor: 'rgba(255,10,10,0.2)',
           borderColor: 'rgba(255,10,10,0.5)',
-          pointBackgroundColor: "rgba(255,10,10,0.2)",
+          pointBackgroundColor: 'rgba(255,10,10,0.2)',
           borderWidth: 2,
           fill: false,
-          yAxisID: "y-axis-1",
+          yAxisID: 'y-axis-1',
         },
         {
           type: 'line',
@@ -105,7 +105,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
           pointBackgroundColor: 'rgba(10,10,255,0.2)',
           borderWidth: 2,
           fill: false,
-          yAxisID: "y-axis-1",
+          yAxisID: 'y-axis-1',
         },
         {
           type: 'bar',
@@ -114,7 +114,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1,
-          yAxisID: "y-axis-2",
+          yAxisID: 'y-axis-2',
         },
 /*        {
           type: 'bar',
@@ -130,7 +130,7 @@ export class JwChartComponent implements OnInit, AfterViewInit {
         responsive: false,
         title: {
           display: true,
-          text: this._caption, //'XXX の　情報',
+          text: this._caption, // 'XXX の　情報',
         },
         legend: {
           position: 'bottom',
@@ -185,26 +185,26 @@ export class JwChartComponent implements OnInit, AfterViewInit {
     const max = Math.max(...this._rain24h);
     const mix = Math.min(...this._rain24h);
 
-    if( max>DEFAULT_MAX_RAIN24H ) {
-      return Math.ceil(max/20)*20 + 20;
+    if (max > DEFAULT_MAX_RAIN24H) {
+      return Math.ceil(max / 20) * 20 + 20;
     } else {
       return DEFAULT_MAX_RAIN24H;
     }
   }
 
   update() {
-    if(this.myChart) {
-    // console.log('ん？呼んだ？');
+    if (this.myChart) {
+      // console.log('ん？呼んだ？');
 
-    this.myChart.data.labels = this._labels;
+      this.myChart.data.labels = this._labels;
 
-    this.myChart.data.datasets[0].data = this._highest;
-    this.myChart.data.datasets[1].data = this._lowest;
-    this.myChart.data.datasets[2].data = this._rain24h;
-    this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
-//    this.myChart.data.datasets[3].data = this.snow;
+      this.myChart.data.datasets[0].data = this._highest;
+      this.myChart.data.datasets[1].data = this._lowest;
+      this.myChart.data.datasets[2].data = this._rain24h;
+      this.myChart.options.scales.yAxes[1].ticks.max = this.getMaxRain24h();
+  //    this.myChart.data.datasets[3].data = this.snow;
 
-    this.myChart.update();
+      this.myChart.update();
     } else {
       // console.log('まだnullっぽい');
     }
@@ -218,19 +218,19 @@ export class JwChartComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    //const date_to = this.yesterday.format('YYYY/MM/DD');
+    // const date_to = this.yesterday.format('YYYY/MM/DD');
     const date_to = this._end_date;
     // moment.js が警告出すから： YYYY/MM/DD は、ISOとか的にイマイチらしい。なので YYYY-MM-DD に置換している
-    const mo = moment(date_to.replace(/\//g,'-')).subtract(this._span-1,'days');
+    const mo = moment(date_to.replace(/\//g, '-')).subtract(this._span - 1, 'days');
     const date_from = mo.format('YYYY/MM/DD');
 
 
     const label_days: string[] = [];
-    //const m = this.yesterday.clone().subtract(13,'days');
+    // const m = this.yesterday.clone().subtract(13,'days');
     const m = mo.clone();
-    for(let i=0;i<this._span;i++) {
+    for (let i = 0; i < this._span; i++) {
       label_days.push( m.format('M/D'));
-      m.add(1,'days');
+      m.add(1, 'days');
     }
 
     this._labels = label_days;
